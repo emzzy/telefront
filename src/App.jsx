@@ -1,8 +1,7 @@
-import Navbar from './components/Navbar'
 import React, { useState } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import Login from './pages/auth/Login'
-import Register from './components/Register'
+import Login from './pages/Login'
+import Register from './pages/Register'
 import Home from './pages/Home'
 import NotFound from './pages/NotFound'
 import ProtectedRoute from './components/ProtectedRoute'
@@ -14,7 +13,7 @@ function Logout() {
   return <Navigate to='/login' />
 }
 
-function RegisterAndLougout() {
+function RegisterAndLogout() {
   localStorage.clear()
   return <Register />
 }
@@ -33,7 +32,7 @@ function App() {
           />
         <Route path='/login' element={<Login />} />
         <Route path='/logout' element={<Logout />} />
-        <Route path='/register' element={<RegisterAndLougout />} />
+        <Route path='/register' element={<RegisterAndLogout />} />
         <Route path='/select-role' element={<SelectRole />} />
         <Route path='*' element={<NotFound />}></Route>
         
