@@ -14,8 +14,8 @@ function Form({ route, method }) {
 
     const handleSubmit = async (e) => {
         setLoading(true);
-        e.preventDefault();
-
+        e.preventDefault();  
+        
         try {
             const res = await api.post(route, { email, password })
             if (method === "login") {
