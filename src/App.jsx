@@ -13,10 +13,10 @@ function Logout() {
   return <Navigate to='/login' />
 }
 
-function RegisterAndLogout() {
-  localStorage.clear()
-  return <Register />
-}
+// function RegisterAndLogout() {
+//   localStorage.clear()
+//   return <Register />
+// }
 
 function App() {  
   return (
@@ -30,10 +30,10 @@ function App() {
             </ProtectedRoute>
           }
           />
+        <Route path='/select-role' element={<SelectRole />} />
         <Route path='/login' element={<Login />} />
         <Route path='/logout' element={<Logout />} />
-        <Route path='/register' element={<RegisterAndLogout />} />
-        <Route path='/select-role' element={<SelectRole />} />
+        <Route path='/register' element={<Register />} />
         <Route path='*' element={<NotFound />}></Route>
         
       </Routes>
