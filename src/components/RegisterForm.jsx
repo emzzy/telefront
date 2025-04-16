@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import api from '../api';
-import { useNavigate } from 'react-router-dom';
-import "../styles/RegisterForm.css"
 import { validateEmail } from '../utils';
+import { data, useNavigate } from 'react-router-dom';
+import "../styles/RegisterForm.css"
 
 
 const PasswordErrorMessage = () => {
@@ -12,24 +12,25 @@ const PasswordErrorMessage = () => {
 };
 
 function RegisterForm() {
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState({
-        value: "", 
-        isTouched: false
+    const [formData, setFormData] = useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        phone: "",
+        gender: "",
+        location: "",
+        dateOfBirth: "",
+        role: ""
     });
-    const [confirmPassword, setConfirmPassword] = useState("");
-    const [phone, setPhone] = useState("");
-    const [gender, setGender] = useState("");
-    const [location, setLocation] = useState("");
-    const [dateOfBirth, setDateOfBirth] = useState("");
-    const [role, setRole] = useState("");
+    const [passwordState, setPasswordState] = useState({value: "", isTouched: false});
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-
+    
     useEffect(() => {
-        const userRole = localStorage.getItem('userRole');
+        const userRole = localStorage.getItem('userRole'); // retrieve role from localStorage
+        console.log(`This user is a: ${userRole}`);
         if (userRole) {
             setFormData(prev => ({ ...prev, role: userRole}));
         }
@@ -41,66 +42,75 @@ function RegisterForm() {
     };
 
     const getIsFormValid = () => {
+        const { firstName, lastName, email, phone, gender, location, dateOfBirth, role } = formData;
         return (
             firstName &&
             lastName &&
             validateEmail(email) &&
-            password.value.length >= 8 &&
+            password.length >= 8 &&
             phone &&
             gender &&
             location &&
             dateOfBirth &&
-            role != 'role'
+            role != userRole
         );
     };
 
     const clearForm = () => {
-        setFirstName("");
-        setLastName("");
-        setEmail("");
-        setPassword({
-            value: "",
-            isTouched: false
+        setFormData({
+            firstName: "",
+            lastName: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+            phone: "",
+            gender: "",
+            location: "",
+            dateOfBirth: "",
+            role: formData.role,
         });
-        setPhone("");
-        setGender("");
-        setLocation("");
-        setDateOfBirth("");
-        setRole("");
     };
-    const name = method === 'register';
 
     const handleSubmit = async (e) => {
+        if (formData.password !== formData.confirmPassword) {
+            alert("passwords do not match");
+            setLoading(false);
+            return;
+        }
         setLoading(true);
         e.preventDefault();
-            
+        
+        const userData = {
+            first_name: formData.firstName,
+            last_name: formData.lastName,
+            email: formData.email,
+            password: formData.password,
+            confirm_password: formData.confirmPassword,
+            phone: formData.phone,
+            gender: formData.gender,
+            location: formData.location,
+            date_of_birth: formData.dateOfBirth,
+            role: formData.role
+        };
+
         try {
-            const res = await api.post('api/user/signup/', {
-                firstName,
-                lastName,
-                email,
-                password,
-                phone,
-                gender,
-                location,
-                dateOfBirth
-            });
+            const res = await api.post('api/user/signup/', userData);
+            
             if (res.status === 200 || res.status === 201) {
                 alert("Account created!");
                 clearForm();
-
-                if (name) {
-                    if (res.data.token) {
-                        localStorage.setItem('ACCESS_TOKEN', res.data.token);
-                    }
+                
+                if (res.data.token) {
+                    localStorage.setItem('ACCESS_TOKEN', res.data.token);
                 }
-                navigate()
+                
+                navigate(formData.role === 'medical_professional' ? '/': '/login');
             }
         }
         catch (error) {
-            const errorMessage = error.response?.data?.message || "Registration failed. Please try again";
-            alert(errorMessage);
-            console.error("Registration error:", error);
+            const errors = error.response?.data || "Registration failed. Please try again";
+            //alert(JSON.stringify("Registration error:", errorMessage, null, 2));
+            console.error("Server reponse:", errors);
         } finally {
             setLoading(false);
         }
@@ -116,18 +126,22 @@ function RegisterForm() {
                             First name <sup>*</sup> 
                         </label>
                         <input
+                            id="firstName"
+                            name="firstName"
                             type="text"
-                            value={firstName}
-                            onChange={(e) => setFirstName(e.target.value)}
+                            value={formData.firstName}
+                            onChange={handleChange}
                             placeholder="First name"
                         />
                     </div>
                     <div className="Field">
                         <label for="lastName" class="form-label">Last Name <sup>*</sup></label>
                         <input
+                            id="lastName"
+                            name="lastName"
                             type="text"
-                            value={lastName}
-                            onChange={(e) => setLastName(e.target.value)}
+                            value={formData.lastName}
+                            onChange={handleChange}
                             placeholder="Last Name"
                         />
                     </div>
@@ -136,9 +150,11 @@ function RegisterForm() {
                             Email <sup>*</sup>
                         </label>
                         <input
+                            id="email"
+                            name="email"
                             type="text"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            value={formData.email}
+                            onChange={handleChange}
                             placeholder="Email address"
                         />
                     </div>
@@ -147,9 +163,11 @@ function RegisterForm() {
                             Phone <sup>*</sup>
                         </label>
                         <input
+                            id="phone"
+                            name="phone"
                             type="number"
-                            value={phone}
-                            onChange={(e) => setPhone(e.target.value)}
+                            value={formData.phone}
+                            onChange={handleChange}
                             placeholder="Mobile number"
                         />
                     </div> 
@@ -158,14 +176,17 @@ function RegisterForm() {
                             Password <sup>*</sup>
                         </label>
                         <input
+                            id="password"
+                            name="password"
                             type="password"
-                            value={password.value}
+                            value={formData.password}
                             onChange={(e) => {
-                                setPassword({ ...password, value: e.target.value})
+                                setPasswordState({ value: e.target.value, isTouched: true });
+                                handleChange({ target: { name: "password", value: e.target.value } });
                             }}
                             placeholder="Password"
                         />
-                        {password.isTouched && password.value.length < 8 ? (
+                        {formData.password.isTouched && password.value.length < 8 ? (
                             <PasswordErrorMessage />
                         ) : null}
                     </div>
@@ -174,9 +195,11 @@ function RegisterForm() {
                             Confirm Password <sup>*</sup>
                         </label>
                         <input
+                            id="confirmPassword"
+                            name="confirmPassword"
                             type="password"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            value={formData.confirmPassword}
+                            onChange={handleChange}
                             placeholder="Confirm Password"
                         />
                     </div>
@@ -184,21 +207,30 @@ function RegisterForm() {
                         <label>
                             Gender <sup>*</sup>
                         </label>
-                        <input
+                        <select
+                            id="gender"
+                            name="gender"
                             type="text"
-                            value={gender}
-                            onChange={(e) => setGender(e.target.value)}
+                            value={formData.gender}
+                            onChange={handleChange}
                             placeholder="Gender"
-                        />
+                        >
+                            <option value="Select Gender"></option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
                     </div>
                     <div className="Field">
                         <label>
                             Location <sup>*</sup>
                         </label>
                         <input
+                            id="location"
+                            name="location"
                             type="text"
-                            value={location}
-                            onChange={(e) => setLocation(e.target.value)}
+                            value={formData.location}
+                            onChange={handleChange}
                             placeholder="Location"
                         />
                     </div>
@@ -207,9 +239,11 @@ function RegisterForm() {
                             Date of Birth <sup>*</sup>
                         </label>
                         <input
-                            type="text"
-                            value={dateOfBirth}
-                            onChange={(e) => setDateOfBirth(e.target.value)}
+                            id="dateOfBirth"
+                            name="dateOfBirth"
+                            type="date"
+                            value={formData.dateOfBirth}
+                            onChange={handleChange}
                             placeholder="Date of birth"
                         />
                     </div>
@@ -217,16 +251,26 @@ function RegisterForm() {
                         <label>
                             Role <sup>*</sup>
                         </label>
-                        <input
+                        <select
+                            id="role"
+                            name="role"
                             type="text"
-                            value={role}
-                            onChange={(e) => setDateOfBirth(e.target.value)}
+                            value={formData.role}
+                            onChange={handleChange}
                             placeholder="User role"
-                        />
+                            disabled
+                        >
+                            <option value="">Select Role</option>
+                            <option value="patient">Patient</option>
+                            <option value="medical_professional">Doctor</option>
+                        </select>
                     </div>
                     <div class="text-center">
-                        <button type="submit" disabled={!getIsFormValid()}>
-                            Create account
+                        <button 
+                            type="submit"
+                            disabled={loading}
+                        >
+                            {loading ? "Creating Account...": "Register"}
                         </button>
                     </div>
                 </fieldset>
