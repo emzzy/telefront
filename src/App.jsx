@@ -6,6 +6,9 @@ import Home from './pages/Home'
 import NotFound from './pages/NotFound'
 import ProtectedRoute from './components/ProtectedRoute'
 import SelectRole from './pages/auth/SelectRole'
+import Services from './pages/Services'
+import AboutUs from './pages/AboutUs'
+import Navbar from './components/Navbar'
 
 
 function Logout() {
@@ -18,26 +21,31 @@ function Logout() {
 //   return <Register />
 // }
 
-function App() {  
+function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route 
-          path='/'
-          element={
-            <ProtectedRoute>
-              <Home />
-            </ProtectedRoute>
-          }
-          />
-        <Route path='/select-role' element={<SelectRole />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/logout' element={<Logout />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='*' element={<NotFound />}></Route>
-        
-      </Routes>
-    </BrowserRouter>
+    <>
+      <BrowserRouter>
+        <Navbar />  
+
+        <Routes>
+          <Route 
+            path='/'
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+            />
+          <Route path='/select-role' element={<SelectRole />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/logout' element={<Logout />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/services' element={<Services />} />
+          <Route path='/about-us' element={<AboutUs />} />
+          <Route path='*' element={<NotFound />}></Route>  
+        </Routes>
+      </BrowserRouter>
+    </>
   )
 }
 
