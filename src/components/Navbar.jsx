@@ -7,7 +7,9 @@ const path = window.location.pathname
 const Navbar = () => {
     return (
         <nav className='navbar'>
-            <Link to="/" className='site-title'>Telemedicine</Link>
+            <Link to="/" className='site-title'>
+                Telemedicine
+            </Link>
             <ul className='navbar-links'>
                 <CustomLink to="/">Home</CustomLink>
                 <CustomLink to="/services">Services</CustomLink>
