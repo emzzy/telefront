@@ -37,7 +37,7 @@ function HomePromo () {
                         <p>Connect with certified professionals instantly</p>
                     </div>
                     <div className="features">
-                        <h2>Our Services</h2>
+                        {/* <h2>Our Services</h2> */}
                         <ul className="features-list">
                             <li>Instant access to certified professionals</li>
                             <li>Book appointments, chat and video call without the hassle</li>
