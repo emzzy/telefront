@@ -2,24 +2,25 @@ import { useEffect, useState } from "react";
 import React from "react"
 import HomePromo from "../components/HomePromo";
 import Services from "./Services";
-import api from "../api";
+// import api from "../api";
+import DoctorList from "../components/DoctorList";
 
 
 function Home() {
-    const [doctors, setDoctors] = useState([]);
-    const [] = useState();
+    // const [doctors, setDoctors] = useState([]);
+    // const [] = useState();
 
-    useEffect(() => {
-        getDoctors();
-    }, [])
+    // useEffect(() => {
+    //     getDoctors();
+    // }, [])
 
-    const getDoctors = () => {
-        api
-            .get('api/users/medical-professionals/')
-            .then((res) => res.data)
-            .then((data) => { setDoctors(data); console.log(data) })
-            .catch((err) => alert(err));
-    };
+    // const getDoctors = () => {
+    //     api
+    //         .get('api/users/all-doctors/')
+    //         .then((res) => res.data)
+    //         .then((data) => { setDoctors(data); console.log(data) })
+    //         .catch((err) => alert(err));
+    // };
     
     // const
     
@@ -27,6 +28,7 @@ function Home() {
         <div>
             <HomePromo />
             <Services />
+            <DoctorList />
         </div>
     );
 }
