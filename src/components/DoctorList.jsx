@@ -8,26 +8,23 @@ import { useNavigate } from 'react-router-dom';
 const DoctorList = () => {
     const [doctors, setDoctors] = useState([]);
     const navigate = useNavigate();
-
     const handleClick = (link, doctor) => {
         navigate(link, { state: { doctor } })
     };
-    
     useEffect(() => {
         getDoctors();
     }, [])
-
+    
     const getDoctors = () => {
         api
             .get('api/users/all-doctors/')
             .then((res) => res.data)
             .then((data) => {
-                setDoctors(data); 
-                console.log(data) 
+                setDoctors(data);
+                console.log(data)
             })
             .catch((err) => alert(err));
     };
-
     return (
         <>
             <div className="doctors-container">
