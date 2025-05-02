@@ -21,6 +21,10 @@
     transition: transform 0.2s ease-in-out;
 }
 
+.service-image {
+    max-width: 300px;
+}
+
 .icon {
     font-size: 2rem;
     margin-bottom: 10px;

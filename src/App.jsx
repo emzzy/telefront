@@ -6,9 +6,10 @@ import Home from './pages/Home'
 import NotFound from './pages/NotFound'
 import ProtectedRoute from './components/ProtectedRoute'
 import SelectRole from './pages/auth/SelectRole'
-import Services from './pages/Services'
+import Services from './components/Services'
 import AboutUs from './pages/AboutUs'
 import Navbar from './components/Navbar'
+import ServiceDetail from './pages/ServiceDetail'
 
 
 function Logout() {
@@ -33,6 +34,7 @@ function App() {
             element={
               <ProtectedRoute>
                 <Home />
+                
               </ProtectedRoute>
             }
             />
@@ -41,6 +43,7 @@ function App() {
           <Route path='/logout' element={<Logout />} />
           <Route path='/register' element={<Register />} />
           <Route path='/services' element={<Services />} />
+          <Route path='/service/:id' element={<ServiceDetail />} />
           <Route path='/about-us' element={<AboutUs />} />
           <Route path='*' element={<NotFound />}></Route>  
         </Routes>
