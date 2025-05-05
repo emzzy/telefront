@@ -17,7 +17,7 @@ const DoctorList = () => {
     
     const getDoctors = () => {
         api
-            .get('api/users/all-doctors/')
+            .get('api/users/medical-professionals/')
             .then((res) => res.data)
             .then((data) => {
                 setDoctors(data);
@@ -38,8 +38,10 @@ const DoctorList = () => {
                             role='button'
                             style={{ cursor: "pointer" }}
                         >
-                            <div className="icon"> {doctors.image} </div>
-                            <h3> 
+                            <div className="icon">
+                            <img src={`http://localhost:8000${doctors.medicalprofessional?.image}`} alt="Doctor" />
+                            </div>
+                            <h3>
                                 {doctors.title} {doctors.first_name} {doctors.last_name} 
                             </h3>
                             <h4> 
