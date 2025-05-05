@@ -4,10 +4,9 @@ import api from '../api'
 
 
 const ServiceDetail = () => {
-    
     const {id} = useParams();
     const [service, setService] = useState(null);
-
+    
     useEffect(() => {
         api.get(`base/service/${id}`)
         .then((res) => setService(res.data))
@@ -26,16 +25,26 @@ const ServiceDetail = () => {
             </div>
             <div className='service-image'>
                 <img
-                    src={service.image}
+                    src={`http://localhost:8000${service.image}`}
                     alt={service.name}
                 />
             </div>
             <h2>Available Doctors</h2>
-            <div className='available-doctors'>
+            {service.available_doctors.map((doctor) => (
+                <div>
+                    <img
+                        src={`http://localhost:8000${doctor.image}`}
+                        alt="doctorImage"
+                    />
+                    <li> {doctor.first_name} {doctor.last_name} </li>
+                    <li>Available time: {doctor.available_appointment_date}</li>
+                </div>
+            ))}
+            {/* <div className='available-doctors'>
                 <div className='service-doctor'>
                     {service.available_doctors}
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 }
