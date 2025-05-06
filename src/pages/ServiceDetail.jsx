@@ -33,11 +33,19 @@ const ServiceDetail = () => {
             {service.available_doctors.map((doctor) => (
                 <div>
                     <img
+                        key={doctor.id}
                         src={`http://localhost:8000${doctor.image}`}
                         alt="doctorImage"
                     />
                     <li key={doctor.id}> {doctor.first_name} {doctor.last_name} </li>
-                    <li>Time available: {doctor.available_appointment_date}</li>
+                    {doctor.medicalprofessional?.available_appointment_date ? (
+                        <li>
+                            Time available:{" "}
+                            {new Date(doctor.medicalprofessional.available_appointment_date).toLocaleString()}
+                        </li>
+                    ) : (
+                        <li>Time available: Not specified</li>
+                    )}
                 </div>
             ))}
             {/* <div className='available-doctors'>
