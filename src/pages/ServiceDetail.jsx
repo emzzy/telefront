@@ -36,8 +36,8 @@ const ServiceDetail = () => {
                         src={`http://localhost:8000${doctor.image}`}
                         alt="doctorImage"
                     />
-                    <li> {doctor.first_name} {doctor.last_name} </li>
-                    <li>Available time: {doctor.available_appointment_date}</li>
+                    <li key={doctor.id}> {doctor.first_name} {doctor.last_name} </li>
+                    <li>Time available: {doctor.available_appointment_date}</li>
                 </div>
             ))}
             {/* <div className='available-doctors'>
