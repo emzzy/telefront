@@ -1,12 +1,20 @@
-import Form from "../components/Form"
+import Form from "../components/Form";
 
 function Login() {
-    return (
-        <div>
-            <Form route="/api/token/" method="login" />
-            <p>Not registered? Signup</p>
-        </div>
-    )
+  return (
+    <div className="">
+      <Form route="/api/token/" method="login" />
+      <p className="flex flex-col items-center justify-center px-4 text-center">
+        Not registered?
+        <a
+          href="/register"
+          className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded transition"
+        >
+          Register
+        </a>
+      </p>
+    </div>
+  );
 }
 
-export default Login
+export default Login;
