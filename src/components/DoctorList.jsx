@@ -42,9 +42,9 @@ const DoctorList = () => {
                             <img src={`http://localhost:8000${doctors.medicalprofessional?.image}`} alt="Doctor" />
                             </div>
                             <h3>
-                                {doctors.title} {doctors.first_name} {doctors.last_name} 
+                                {doctors.title} {doctors.first_name} {doctors.last_name}
                             </h3>
-                            <h4> 
+                            <h4>
                                 <TfiLocationPin />  {doctors.location}
                             </h4>
                             <button className="doctor-button">
