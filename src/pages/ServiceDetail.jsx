@@ -31,22 +31,37 @@ const ServiceDetail = () => {
             </div>
             <h2>Available Doctors</h2>
             {service.available_doctors.map((doctor) => (
-                <div>
-                    <img
+                doctor.medicalprofessional ? (
+                    <div
                         key={doctor.id}
-                        src={`http://localhost:8000${doctor.image}`}
-                        alt="doctorImage"
-                    />
-                    <li key={doctor.id}> {doctor.first_name} {doctor.last_name} </li>
-                    {doctor.medicalprofessional?.available_appointment_date ? (
-                        <li>
-                            Time available:{" "}
-                            {new Date(doctor.medicalprofessional.available_appointment_date).toLocaleString()}
-                        </li>
-                    ) : (
-                        <li>Time available: Not specified</li>
-                    )}
-                </div>
+                        className='flex items-center justify-between bg-white shadow-md rounded-lg p-6'
+                    >
+                        <div className='flex items-center space-x-4'>
+                            <img
+                                src={`http://localhost:8000${doctor.medicalprofessional.image}`}
+                                alt="doctorImage"
+                                className='w-20 h-20 object-cover rounded-full'
+                            />
+                        </div>
+                        <h3 className='text-xl font-semibold'>
+                            {doctor.first_name} {doctor.last_name}
+                        </h3>
+                        <p className='text-sm text-gray-700'>
+                            <span className='font-medium'> Time Available: </span>{' '}
+                            {new Date(doctor.medicalprofessional.available_appointment_date).toLocaleString('en-GB', {
+                                day: 'numeric',
+                                month: 'long',
+                                year: 'numeric',
+                            })}
+                        </p>
+                        <p className='text-sm text-gray-700'>
+                            <span className='font-medium'>Price: </span> ${service.cost}
+                        </p>
+                        <button className='bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-300'>
+                            Book Now
+                        </button>
+                    </div>
+                ) : null
             ))}
             {/* <div className='available-doctors'>
                 <div className='service-doctor'>
@@ -56,4 +71,4 @@ const ServiceDetail = () => {
         </div>
     )
 }
-export default ServiceDetail
+export default ServiceDetail;
