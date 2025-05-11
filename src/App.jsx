@@ -9,6 +9,7 @@ import Services from "./components/Services";
 import AboutUs from "./pages/AboutUs";
 import Navbar from "./components/Navbar";
 import ServiceDetail from "./pages/ServiceDetail";
+import BookAppointment from "./pages/BookAppointment";
 import "./styles/global.css";
 
 function Logout() {
@@ -44,6 +45,7 @@ function App() {
           <Route path="/service/:id" element={<ServiceDetail />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="*" element={<NotFound />}></Route>
+          <Route path="/book-appointment" element={<BookAppointment />}></Route>
         </Routes>
       </BrowserRouter>
     </>
