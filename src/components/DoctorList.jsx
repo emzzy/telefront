@@ -39,7 +39,7 @@ const DoctorList = () => {
             >
               <div className="icon">
                 <img
-                  src={`http://localhost:8000${doctors.medicalprofessional?.image}`}
+                  src={`http://aws.com/s3/8000${doctors.medicalprofessional?.image}`}
                   alt="Doctor"
                 />
               </div>
