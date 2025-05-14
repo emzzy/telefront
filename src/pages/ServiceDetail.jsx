@@ -1,25 +1,33 @@
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { createContext, useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import api from '../api'
 
 
 const ServiceDetail = () => {
-    const {id} = useParams();
+    const {serviceId} = useParams();
     const [service, setService] = useState(null);
+    const navigate = useNavigate();
+    const UserContext = createContext;
     
     useEffect(() => {
-        api.get(`base/service/${id}`)
+        api.get(`base/service/${serviceId}`)
         .then((res) => setService(res.data))
         .catch((err) => console.error(err));
-    }, [id]);
+    }, [serviceId]);
+
+    const handleClick = (serviceId, doctor) => {
+        navigate(`/book-appointment/${service.id}/${doctor.id}`, {
+        });
+        console.log(`Doctor id: ${doctor.id}`)
+    };
 
     if (!service) return <p>Loading..............</p>
-    console.log(`The service detail is ${id}`)
+    // console.log(`The service detail is ${service.available_doctors.id}`)
     return (
         <div className='max-w-5xl mx-auto py-10'>
             <h3 className='text-3xl font-bold text-blue-900 mb-2'>Service Detail</h3>
             <div className='service-name'>
-                <h1> {service.id}: {service.name} </h1>
+                <h1> Service id: {service.id} - {service.name} </h1>
                 <p> {service.description} </p>
             </div>
             <div className='service-image'>
@@ -62,7 +70,10 @@ const ServiceDetail = () => {
                             <p className='text-sm text-gray-700'>
                                 <span className='font-medium'>Price: </span> ${service.cost}
                             </p>
-                            <button className='bg-red-600 text-white px-5 py-2 rounded-md hover:bg-red-700 transition duration-300'>
+                            <button
+                                onClick={() => handleClick(service.id, doctor)}
+                                className='bg-red-600 text-white px-5 py-2 rounded-md hover:bg-red-700 transition duration-300'
+                            >
                                 Book Now
                             </button>
                         </div>
