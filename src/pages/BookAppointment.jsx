@@ -4,16 +4,75 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import api from '../api';
 
 
-const BookAppointment = () => {
+function BookAppointment() {
   const { state } = useLocation();
   const { serviceId, doctorId } = useParams();
-  const [service, setService] = useState();
+  // const [service, setService] = useState();
   const navigate = useNavigate();
-  console.log(serviceId)
+  const [loading, setLoading] = useState(false);
+  console.log(`Service ID:${state?.serviceId}..DoctorID: ${state.doctorId}`)
+  
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
+    gender: "",
+    dateOfBirth: "",
+    address: "",
+    issues: "",
+    symptoms: ""
+  });
+  
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  }
+
+  const clearForm = () => {
+    setFormData({
+      fullName: "",
+      email: "",
+      phone: "",
+      gender: "",
+      dateOfBirth: "",
+      address: "",
+      issues: "",
+      symptoms: ""
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const userData = {
+      full_name: formData.fullName,
+      email: formData.email,
+      mobile: formData.phone,
+      gender: formData.gender,
+      address: formData.address,
+      date_of_birth: formData.dateOfBirth,
+      issues: formData.issues,
+      symptoms: formData.symptoms
+    };
+    try {
+      const res = await api.post(`book-appointment/${serviceId}/${doctorId}/`, userData);
+      const billingId = res.data.billing_id
+      if (res.status === 200 || res.status === 201) {
+        alert('Appointment submitted!');
+        clearForm();
+        navigate(`/checkout/${billingId}`);
+      }
+    } catch (error) {
+      const errors = error.response?.data || 'Failed to book appointment. Please try again.';
+      console.error('Server response:', errors);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className=''>
-      <div className='Doctor-panel'>       
+      <div className='Doctor-panel'>
         <img
           src={`http://localhost:8000${state?.doctorImage}`}
           alt="Doctor Image"
@@ -23,7 +82,7 @@ const BookAppointment = () => {
       </div>
       <div>
         <h1> Book Appointment </h1>
-        <form action=""></form>
+        <form onSubmit={handleSubmit}>
           <fieldset>
             <div className='Field'>
               <label>
@@ -31,29 +90,40 @@ const BookAppointment = () => {
               </label>
               <input
                 id='fullName'
+                name='fullName'
                 type="text"
                 placeholder='John Doe'
+                value={formData.full_name}
+                onChange={handleChange}
+                required
               />
             </div>
             <div className='Field'>
               <label>
                 email <sup>*</sup>
               </label>
-              <input 
+              <input
                 id='email'
+                name='email'
                 type="email"
                 placeholder='example@mail.com'
-                
+                value={formData.email}
+                onChange={handleChange}
+                required
               />
             </div>
             <div className='Field'>
               <label>
                 Mobile Number <sup>*</sup>
               </label>
-              <input 
+              <input
                 id='phone'
+                name='phone'
                 type="number"
-                placeholder='+123456789'                
+                placeholder='+123456789'
+                value={formData.phone}
+                onChange={handleChange}
+                required
               />
             </div>
             <div className='Field'>
@@ -65,6 +135,9 @@ const BookAppointment = () => {
                 name="gender"
                 type="text"
                 placeholder="Gender"
+                value={formData.gender}
+                onChange={handleChange}
+                required
               >
                 <option value="Select Gender">Select</option>
                 <option value="male">Male</option>
@@ -76,35 +149,57 @@ const BookAppointment = () => {
               <label>
                 Date of Birth <sup>*</sup>
               </label>
-              <input 
+              <input
                 id='dateOfBirth'
+                name='dateOfBirth'
                 type="date"
-                
+                value={formData.dateOfBirth}
+                onChange={handleChange}
               />
             </div>
             <div className='Field'>
               <label>
                 Address <sup>*</sup>
               </label>
-              <input 
+              <input
                 id='address'
+                name='address'
                 type="text"
                 placeholder='123 Street Address'
+                value={formData.address}
+                onChange={handleChange}
+                required
               />
             </div>
             <div className='Field'>
               <label>
                 Issues
               </label>
-              <input 
+              <input
                 id='issues'
-                type="text"                
+                name='issues'
+                type="text"
+                value={formData.issues}
+                onChange={handleChange}
               />
             </div>
-            <button type="submit">
+            <div className='Field'>
+              <label>
+                Symptoms
+              </label>
+              <input
+                id='symptoms'
+                name='symptoms'
+                type="text"
+                value={formData.symptoms}
+                onChange={handleChange}
+              />
+            </div>
+            <button type="submit" disabled={loading}>
               Book Appointment
             </button>
           </fieldset>
+        </form>
       </div>
     </div>
 
