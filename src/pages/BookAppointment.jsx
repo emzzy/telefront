@@ -1,17 +1,19 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useAppointmentContext } from '../context/AppointmentContext';
 import api from '../api';
 
 
 function BookAppointment() {
-  const { state } = useLocation();
   const { serviceId, doctorId } = useParams();
   // const [service, setService] = useState();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  console.log(`Service ID:${state?.serviceId}..DoctorID: ${state.doctorId}`)
-  
+  // console.log(`Service ID:${state?.serviceId}..DoctorID: ${state.doctorId}`)
+  const { serviceDetails, doctorDetails } = useAppointmentContext();
+
+
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -55,7 +57,7 @@ function BookAppointment() {
       symptoms: formData.symptoms
     };
     try {
-      const res = await api.post(`book-appointment/${serviceId}/${doctorId}/`, userData);
+      const res = await api.post(`/base/book-appointment/${serviceId}/${doctorId}/`, userData);
       const billingId = res.data.billing_id
       if (res.status === 200 || res.status === 201) {
         alert('Appointment submitted!');
@@ -74,11 +76,12 @@ function BookAppointment() {
     <div className=''>
       <div className='Doctor-panel'>
         <img
-          src={`http://localhost:8000${state?.doctorImage}`}
+          src={`http://localhost:8000${doctorDetails?.medicalprofessional.image}`}
           alt="Doctor Image"
         />
-        <h2>Dr. {state.doctorFirstName} {state.doctorLastName} </h2>
-        <p> {state.doctorBio} </p>
+        <h1>Service {serviceDetails?.name} </h1>
+        <h2>Dr. {doctorDetails?.first_name} {doctorDetails?.id} </h2>
+        <p> {doctorDetails?.doctorBio} </p>
       </div>
       <div>
         <h1> Book Appointment </h1>
