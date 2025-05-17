@@ -13,9 +13,9 @@ function BookAppointment() {
   // console.log(`Service ID:${state?.serviceId}..DoctorID: ${state.doctorId}`)
   const { serviceDetails, doctorDetails } = useAppointmentContext();
 
-
   const [formData, setFormData] = useState({
-    fullName: "",
+    firstName: "",
+    lastName: "",
     email: "",
     phone: "",
     gender: "",
@@ -31,7 +31,8 @@ function BookAppointment() {
 
   const clearForm = () => {
     setFormData({
-      fullName: "",
+      firstName: "",
+      lastName: "",
       email: "",
       phone: "",
       gender: "",
@@ -47,7 +48,8 @@ function BookAppointment() {
     setLoading(true);
 
     const userData = {
-      full_name: formData.fullName,
+      first_name: formData.firstName,
+      last_name: formData.lastName,
       email: formData.email,
       mobile: formData.phone,
       gender: formData.gender,
@@ -79,9 +81,9 @@ function BookAppointment() {
           src={`http://localhost:8000${doctorDetails?.medicalprofessional.image}`}
           alt="Doctor Image"
         />
-        <h1>Service {serviceDetails?.name} </h1>
-        <h2>Dr. {doctorDetails?.first_name} {doctorDetails?.id} </h2>
-        <p> {doctorDetails?.doctorBio} </p>
+        <h1>Service: {serviceDetails?.name} </h1>
+        <h2>Dr. {doctorDetails?.first_name} {doctorDetails?.last_name} </h2>
+        <p> Doctor Bio - {doctorDetails?.medicalprofessional.bio} </p>
       </div>
       <div>
         <h1> Book Appointment </h1>
@@ -89,14 +91,28 @@ function BookAppointment() {
           <fieldset>
             <div className='Field'>
               <label>
-                Full name <sup>*</sup>
+                First name <sup>*</sup>
               </label>
               <input
-                id='fullName'
-                name='fullName'
+                id='firstName'
+                name='firstName'
                 type="text"
-                placeholder='John Doe'
-                value={formData.full_name}
+                placeholder='John'
+                value={formData.firstName}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className='Field'>
+              <label>
+                Last name <sup>*</sup>
+              </label>
+              <input
+                id='lastName'
+                name='lastName'
+                type="text"
+                placeholder='Doe'
+                value={formData.lastName}
                 onChange={handleChange}
                 required
               />
