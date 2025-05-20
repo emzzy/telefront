@@ -20,7 +20,7 @@ function BookAppointment() {
     phone: "",
     gender: "",
     dateOfBirth: "",
-    address: "",
+    location: "",
     issues: "",
     symptoms: ""
   });
@@ -37,7 +37,7 @@ function BookAppointment() {
       phone: "",
       gender: "",
       dateOfBirth: "",
-      address: "",
+      location: "",
       issues: "",
       symptoms: ""
     });
@@ -53,7 +53,7 @@ function BookAppointment() {
       email: formData.email,
       mobile: formData.phone,
       gender: formData.gender,
-      address: formData.address,
+      location: formData.address,
       date_of_birth: formData.dateOfBirth,
       issues: formData.issues,
       symptoms: formData.symptoms
@@ -178,14 +178,14 @@ function BookAppointment() {
             </div>
             <div className='Field'>
               <label>
-                Address <sup>*</sup>
+                Location <sup>*</sup>
               </label>
               <input
-                id='address'
-                name='address'
+                id='location'
+                name='location'
                 type="text"
                 placeholder='123 Street Address'
-                value={formData.address}
+                value={formData.location}
                 onChange={handleChange}
                 required
               />
