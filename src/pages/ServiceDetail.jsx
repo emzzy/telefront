@@ -1,13 +1,15 @@
 import React, { createContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { useAppointmentContext } from '../context/AppointmentContext';
 import api from '../api'
 
 
 const ServiceDetail = () => {
     const {serviceId} = useParams();
     const [service, setService] = useState(null);
+    const { setServiceDetails, setDoctorDetails } = useAppointmentContext();
     const navigate = useNavigate();
-    const UserContext = createContext;
+    
     
     useEffect(() => {
         api.get(`base/service/${serviceId}`)
@@ -15,11 +17,16 @@ const ServiceDetail = () => {
         .catch((err) => console.error(err));
     }, [serviceId]);
 
-    const handleClick = (serviceId, doctor) => {
+    const handleClick = (doctor) => {
+        setServiceDetails(service);
+        setDoctorDetails(doctor);
         navigate(`/book-appointment/${service.id}/${doctor.id}`, {
         });
-        console.log(`Doctor id: ${doctor.id}`)
     };
+    const { serviceDetails } = useAppointmentContext();
+    if (serviceDetails) {
+        console.log(`Service in context: ${serviceDetails?.name}`);
+    }
 
     if (!service) return <p>Loading..............</p>
     // console.log(`The service detail is ${service.available_doctors.id}`)
@@ -71,7 +78,7 @@ const ServiceDetail = () => {
                                 <span className='font-medium'>Price: </span> ${service.cost}
                             </p>
                             <button
-                                onClick={() => handleClick(service.id, doctor)}
+                                onClick={() => handleClick(doctor)}
                                 className='bg-red-600 text-white px-5 py-2 rounded-md hover:bg-red-700 transition duration-300'
                             >
                                 Book Now
