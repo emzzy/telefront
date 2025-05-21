@@ -1,8 +1,8 @@
-import { createContext, useState, useContext, Children } from "react";
+import { createContext, useState, useContext, children } from "react";
 
 const AppointmentFormContext = createContext();
 
-export const useAppointmentForm = () => useContext(FormContext);
+export const useAppointmentForm = () => useContext(AppointmentFormContext);
 
 export const AppointmentFormProvider = ({ children }) => {
     const [formData, setFormData] = useState({});
