@@ -8,7 +8,7 @@ export const AppointmentProvider = ({ children }) => {
 
     return (
     <AppointmentContext.Provider value={{
-        serviceDetails, 
+        serviceDetails,
         setServiceDetails, 
         doctorDetails, 
         setDoctorDetails

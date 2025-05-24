@@ -11,6 +11,10 @@ import Navbar from "./components/Navbar";
 import ServiceDetail from "./pages/ServiceDetail";
 import BookAppointment from "./pages/BookAppointment";
 import "./styles/global.css";
+import Checkout from "./pages/Checkout";
+import { AppointmentFormProvider } from "./context/AppointmentFormContext";
+import { AppointmentProvider } from "./context/AppointmentContext";
+
 
 function Logout() {
   localStorage.clear();
@@ -25,29 +29,34 @@ function Logout() {
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <Navbar />
+      <AppointmentFormProvider>
+        <AppointmentProvider>
+          <BrowserRouter>
+            <Navbar />
 
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <Home />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="/select-role" element={<SelectRole />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/logout" element={<Logout />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/service/:id" element={<ServiceDetail />} />
-          <Route path="/about-us" element={<AboutUs />} />
-          <Route path="*" element={<NotFound />}></Route>
-          <Route path="/book-appointment" element={<BookAppointment />}></Route>
-        </Routes>
-      </BrowserRouter>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <ProtectedRoute>
+                    <Home />
+                  </ProtectedRoute>
+                }
+              />
+              <Route path="/select-role" element={<SelectRole />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/logout" element={<Logout />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/service/:serviceId" element={<ServiceDetail />} />
+              <Route path="/book-appointment/:serviceId/:doctorId" element={<BookAppointment />} />
+              <Route path="/checkout/:billingId" element={<Checkout />} />
+              <Route path="/about-us" element={<AboutUs />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </AppointmentProvider>
+      </AppointmentFormProvider>
     </>
   );
 }
