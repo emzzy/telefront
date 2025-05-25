@@ -14,6 +14,7 @@ const Navbar = () => {
         <CustomLink to="/">Home</CustomLink>
         <CustomLink to="/services">Services</CustomLink>
         <CustomLink to="/about-us">About Us</CustomLink>
+        <CustomLink to="/login">Login/Register</CustomLink>
       </ul>
       <div className="navbar-icons">
         <Link to="#">
