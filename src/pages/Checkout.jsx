@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useAppointmentForm } from '../context/AppointmentFormContext';
 import { useAppointmentContext } from '../context/AppointmentContext';
 import api from '../api';
@@ -9,13 +9,33 @@ const Checkout = () => {
     const { formData } = useAppointmentForm();
     const { doctorDetails } = useAppointmentContext();
     const [billingDetails, setBillingDetails] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
     
     useEffect(() => {
         api.get(`base/billing/${billingId}/`)
         .then((res) => setBillingDetails(res.data.data))
         .catch((err) => console.error(err));
     }, [billingId]);
-        
+    
+    const handlePayClick = async () => {
+        setLoading(true);
+
+        try {
+            const res = await api.post(`base/create-checkout-session/${billingId}/`);
+            
+            if (res.data && res.data.url) {
+                window.location.href = res.data.url;
+            } else {
+                console.error('No Stripe session URL returned');
+            }
+        } catch (error) {
+            console.error('Stripe checkout error:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
         <div>
             <h1>Billing details</h1>
@@ -67,8 +87,11 @@ const Checkout = () => {
                         <label htmlFor="readOnlyInput"> Sub-total £{billingDetails.sub_total} </label>
                         <label htmlFor="readOnlyInput"> VAT £{billingDetails.tax} </label>
                         <label htmlFor="readOnlyInput"> Total £{billingDetails.total} </label>
-                        <button>
-                            Pay with stripe
+                        <button
+                            onClick={handlePayClick}
+                            disabled={loading}
+                        >
+                            {loading ? "Processing..." : 'Pay with stripe'}
                         </button>
                     </fieldset>
                 </div>
