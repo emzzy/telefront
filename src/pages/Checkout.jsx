@@ -68,7 +68,7 @@ const Checkout = () => {
                     </div>
                     <div>
                         <label htmlFor="readOnlyInput"> Location </label>
-                        <input type="text" id='location' value={formData.address} readOnly />
+                        <input type="text" id='location' value={formData.location} readOnly />
                     </div>
                     <div>
                         <label htmlFor="readOnlyInput"> Issues </label>
@@ -95,7 +95,7 @@ const Checkout = () => {
                         </button>
                     </fieldset>
                 </div>
-            ) : (
+            ) : ( 
                 <p> Loading billing details..... </p>
             )}
 
