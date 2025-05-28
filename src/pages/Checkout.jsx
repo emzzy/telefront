@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom';
+import { data, useNavigate, useParams } from 'react-router-dom';
 import { useAppointmentForm } from '../context/AppointmentFormContext';
 import { useAppointmentContext } from '../context/AppointmentContext';
 import api from '../api';
+import { PayPalButtons } from '@paypal/react-paypal-js';
 
 const Checkout = () => {
     const { billingId } = useParams();
@@ -87,12 +88,44 @@ const Checkout = () => {
                         <label htmlFor="readOnlyInput"> Sub-total £{billingDetails.sub_total} </label>
                         <label htmlFor="readOnlyInput"> VAT £{billingDetails.tax} </label>
                         <label htmlFor="readOnlyInput"> Total £{billingDetails.total} </label>
+                        
                         <button
                             onClick={handlePayClick}
                             disabled={loading}
                         >
                             {loading ? "Processing..." : 'Pay with stripe'}
                         </button>
+
+                        <div style={{ marginTop: "1rem" }}>
+                            <PayPalButtons
+                                style={{ layout: "vertical" }}
+                                createOrder={(data, actions) => {
+                                    return actions.order.create({
+                                        purchase_units: [{
+                                            amount: {
+                                                value: billingDetails.total.toString(),
+                                                currency_code: "GBP"
+                                            },
+                                        }],
+                                    });
+                                }}
+                                onApprove={(data, actions) => {
+                                    return actions.order.capture().then(function (details) {
+                                        api.get(`base/paypal/verify/${billingId}/?transaction_id=${data.orderID}}`)
+                                            .then(res => {
+                                                console.log('Payment verified', res.data);
+                                                navigate('/payment-success');
+                                            })
+                                            .catch(err => {
+                                                console.error('verification failed', err);
+                                            });
+                                    });
+                                }}
+                                onError={(err) => {
+                                    console.error('Paypal checkout error', err);
+                                }}
+                            />
+                        </div>
                     </fieldset>
                 </div>
             ) : ( 

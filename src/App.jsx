@@ -14,6 +14,8 @@ import "./styles/global.css";
 import Checkout from "./pages/Checkout";
 import { AppointmentFormProvider } from "./context/AppointmentFormContext";
 import { AppointmentProvider } from "./context/AppointmentContext";
+import PaymentSuccess from "./pages/PaymentSuccess";
+import Message from "./components/Message";
 
 
 function Logout() {
@@ -27,13 +29,26 @@ function Logout() {
 // }
 
 function App() {
+  // const [message, setMessage] = useState("");
+
+  // useEffect(() => {
+  //   const query = new URLSearchParams(window.location.search);
+  //   if (query.get("success")){
+  //     setMessage("Order placed! You will receive an email confirmation.")
+  //   }
+  //   if (query.get("canceled")){
+  //     setMessage(
+  //       "Order canceled -- continue to shop around and checkout when you're ready."
+  //     );
+  //   }
+  // }, []);
+
   return (
     <>
       <AppointmentFormProvider>
         <AppointmentProvider>
           <BrowserRouter>
             <Navbar />
-
             <Routes>
               <Route
                 path="/"
@@ -52,6 +67,7 @@ function App() {
               <Route path="/book-appointment/:serviceId/:doctorId" element={<BookAppointment />} />
               <Route path="/checkout/:billingId" element={<Checkout />} />
               <Route path="/about-us" element={<AboutUs />} />
+              <Route path="/payment-success" element={<PaymentSuccess />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
