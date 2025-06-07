@@ -15,8 +15,7 @@ import Checkout from "./pages/Checkout";
 import { AppointmentFormProvider } from "./context/AppointmentFormContext";
 import { AppointmentProvider } from "./context/AppointmentContext";
 import PaymentSuccess from "./pages/PaymentSuccess";
-import Message from "./components/Message";
-
+import Dashboard from "./pages/Dashboard";
 
 function Logout() {
   localStorage.clear();
@@ -66,6 +65,7 @@ function App() {
               <Route path="/service/:serviceId" element={<ServiceDetail />} />
               <Route path="/book-appointment/:serviceId/:doctorId" element={<BookAppointment />} />
               <Route path="/checkout/:billingId" element={<Checkout />} />
+              <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/about-us" element={<AboutUs />} />
               <Route path="/payment-success" element={<PaymentSuccess />} />
               <Route path="*" element={<NotFound />} />
