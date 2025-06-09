@@ -39,7 +39,7 @@ const DoctorList = () => {
             >
               <div className="icon">
                 <img
-                  src={`http://aws.com/s3/8000${doctors.medicalprofessional?.image}`}
+                  src={`http://localhost:8000${doctors.medicalprofessional?.image}`}
                   alt="Doctor"
                 />
               </div>
@@ -47,7 +47,7 @@ const DoctorList = () => {
                 {doctors.title} {doctors.first_name} {doctors.last_name}
               </h3>
               <h4>
-                {doctors.location}
+                Location: {doctors.location}
               </h4>
               <button className="doctor-button">Chat</button>
             </div>

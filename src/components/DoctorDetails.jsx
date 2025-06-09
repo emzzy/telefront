@@ -25,4 +25,4 @@ const DoctorDetails = () => {
     )
 }
 
-export default DoctorDetails
+export default DoctorDetails;

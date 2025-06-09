@@ -66,7 +66,6 @@ function RegisterForm() {
       role != userRole
     );
   };
-
   const clearForm = () => {
     setFormData({
       firstName: "",
@@ -81,7 +80,6 @@ function RegisterForm() {
       role: formData.role,
     });
   };
-
   const handleSubmit = async (e) => {
     if (formData.password !== formData.confirmPassword) {
       alert("passwords do not match");
@@ -106,7 +104,6 @@ function RegisterForm() {
 
     try {
       const res = await api.post("api/user/signup/", userData);
-
       if (res.status === 200 || res.status === 201) {
         alert("Account created!");
         clearForm();
@@ -146,7 +143,7 @@ function RegisterForm() {
             />
           </div>
           <div className="Field">
-            <label for="lastName" class="form-label">
+            <label>
               Last Name <sup>*</sup>
             </label>
             <input
@@ -181,7 +178,7 @@ function RegisterForm() {
               type="number"
               value={formData.phone}
               onChange={handleChange}
-              placeholder="Mobile number"
+              placeholder="+123456789"
             />
           </div>
           <div className="Field">
@@ -280,7 +277,7 @@ function RegisterForm() {
               <option value="medical_professional">Doctor</option>
             </select>
           </div>
-          <div class="text-center">
+          <div className="text-center">
             <button type="submit" disabled={loading}>
               {loading ? "Creating Account..." : "Register"}
             </button>

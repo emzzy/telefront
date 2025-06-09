@@ -3,14 +3,13 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useAppointmentContext } from '../context/AppointmentContext';
 import api from '../api';
-
+import { useAppointmentForm } from '../context/AppointmentFormContext';
 
 function BookAppointment() {
   const { serviceId, doctorId } = useParams();
   // const [service, setService] = useState();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  // console.log(`Service ID:${state?.serviceId}..DoctorID: ${state.doctorId}`)
   const { serviceDetails, doctorDetails } = useAppointmentContext();
 
   const [formData, setFormData] = useState({
@@ -42,6 +41,7 @@ function BookAppointment() {
       symptoms: ""
     });
   };
+  const { setFormData: seFormContext } = useAppointmentForm();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -51,9 +51,9 @@ function BookAppointment() {
       first_name: formData.firstName,
       last_name: formData.lastName,
       email: formData.email,
-      mobile: formData.phone,
+      phone_number: formData.phone,
       gender: formData.gender,
-      location: formData.address,
+      location: formData.location,
       date_of_birth: formData.dateOfBirth,
       issues: formData.issues,
       symptoms: formData.symptoms
@@ -61,10 +61,12 @@ function BookAppointment() {
     try {
       const res = await api.post(`/base/book-appointment/${serviceId}/${doctorId}/`, userData);
       const billingId = res.data.billing_id
+
       if (res.status === 200 || res.status === 201) {
+        seFormContext(userData);
         alert('Appointment submitted!');
         clearForm();
-        navigate(`/checkout/${billingId}`);
+        navigate(`/checkout/${billingId}/`);
       }
     } catch (error) {
       const errors = error.response?.data || 'Failed to book appointment. Please try again.';
@@ -73,7 +75,7 @@ function BookAppointment() {
       setLoading(false);
     }
   };
-
+  
   return (
     <div className=''>
       <div className='Doctor-panel'>
