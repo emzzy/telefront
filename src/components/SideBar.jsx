@@ -15,7 +15,7 @@ const SideBar = ({ doctor }) => {
                         alt={doctor.first_name}
                     />
                     <div className='flex flex-col'>
-                        <h2 className='text-2xl font-bold md:block'> Dr. {doctor.user.first_name} {doctor.user.last_name} </h2>
+                        <h2 className='text-2xl font-bold md:block'> Dr. {doctor.first_name} </h2>
                         <span className='text-sm text-gray'> Doctor ID: {doctor.medical_license} </span>
                     </div>
                     <div className='block md:hidden'>
