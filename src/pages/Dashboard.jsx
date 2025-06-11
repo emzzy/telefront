@@ -5,25 +5,28 @@ import Card from '../components/Card';
 import { FaCalendarAlt,  } from 'react-icons/fa';
 import { IoIosNotifications } from "react-icons/io";
 import api from '../api';
+import { MdDelete } from "react-icons/md";
+import { FaEye } from "react-icons/fa";
 
 
 const Dashboard = () => {
     const [dashboardData, setDashboardData] = useState(null);
-    const totalAppointmnets = dashboardData.appointments?.length || 0;
-    const totalNotifications = dashboardData.notifications?.length || 0;
     
     useEffect(() => {
-        api.get('/doctor/dashboard')
+        api.get('/doctor/dashboard/')
         .then(res => setDashboardData(res.data))
         .catch(err => console.error('Error fetching dashboard', err));
     }, []);
     
-    if (!dashboardData)
+    if (!dashboardData) {
         return <div> Loading........ </div>;
+    }
+    const totalAppointments = dashboardData.appointments.length || 0;
+    const totalNotifications = dashboardData.notifications.length || 0;
 
     return (
         <div className='flex'>
-            <SideBar doctor={dashboardData} />
+            <SideBar doctor={dashboardData.doctor} />
             <div className='grow ml-16 md:ml-64 h-full lg:h-screen bg-gray-100 text-gray-900'>
                 <DashboardNavbar doctor={dashboardData.doctor} />
                 
@@ -31,30 +34,49 @@ const Dashboard = () => {
                     <h2> Dashboard </h2>
                     
                     <div className='grid grid-cols-2 p-2 md:grid-cols-4 lg:grid-cols-4 gap-4 mb-6'>
-                        <Card icon={<FaCalendarAlt />} title='Appointments' value={totalAppointmnets} />
+                        <Card icon={<FaCalendarAlt />} title='Appointments' value={totalAppointments} />
                         <Card icon={<IoIosNotifications />} title='Notifications' value={totalNotifications} />
                     </div>
 
-                    <table className='w-full border-collapse border border-gray-300'>
+                    <table className='w-full border-collapse border-t border-b border-gray-300'>
                         <thead>
-                            <tr className='bg-gray-100'>
-                                <th className='border border-gray-300 p-3 text-left'> Appointment ID </th>
-                                <th className='border border-gray-300 p-3 text-left'> Patient </th>
-                                <th className='border border-gray-300 p-3 text-left'> Issue </th>
-                                <th className='border border-gray-300 p-3 text-left'> Date </th>
-                                <th className='border border-gray-300 p-3 text-left'> Status </th>
-                                <th className='border border-gray-300 p-3 text-left'> Action </th>
+                            <tr className='bg-gray-200'>
+                                <th className='p-3 text-left'> Appointment ID </th>
+                                <th className='p-3 text-left'> Patient </th>
+                                <th className='p-3 text-left'> Issue </th>
+                                <th className='p-3 text-left'> Date </th>
+                                <th className='p-3 text-left'> Status </th>
+                                <th className='p-3 text-left'> Action </th>
                             </tr>
                         </thead>
                         <tbody>
-                            {dashboardData?.appointments?.map((appointment, index) => {
-                                    return <tr key={index} >
-                                        <td className='border border-gray-300 p-3'> {appointment.appointment_id} </td>
-                                        <td className='border border-gray-300 p-3'>Patient #{appointment.patient} </td>
-                                        <td className='border border-gray-300 p-3'> {appointment.issues} </td>
-                                        <td className='border border-gray-300 p-3'> {appointment.appointment_date} </td>
-                                        <td className='border border-gray-300 p-3'> {appointment.status} </td>
-                                        <td className='border border-gray-300 p-3'> {appointment.appointment_id} </td>
+                            {dashboardData?.appointments.map((appointment, index) => {
+                            return <tr key={index} className='border-t border-gray-300'>
+                                        <td className='p-3'> {appointment.appointment_id} </td>
+                                        <td className='p-3'>Patient #{appointment.patient} </td>
+                                        <td className='p-3'> {appointment.issues} </td>
+                                        <td className='p-3'> 
+                                            {new Date(appointment.appointment_date).toLocaleDateString()}
+                                        </td>
+                                        <td className='p-3'>
+                                            <span
+                                                className={`px-2 py-1 rounded text-white ${
+                                                    appointment.status === 'Completed'
+                                                    ? 'bg-green-500'
+                                                    : appointment.status === 'Scheduled'
+                                                    ? 'bg-yellow-400'
+                                                    : 'bg-gray-500'
+                                                }`}
+                                            >
+                                                {appointment.status}
+                                            </span>
+                                        </td>
+                                        <td className='flex p-3 items-center '>
+                                            <FaEye size={19} className='mr-3 bg-gray-200'/>
+                                            <button className='flex gap-1 bg-red-300'>
+                                                Cancel Appointment <MdDelete size={19}/>
+                                            </button>
+                                        </td>
                                     </tr>
                                 })
                             }
