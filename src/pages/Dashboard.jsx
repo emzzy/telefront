@@ -53,7 +53,7 @@ const Dashboard = () => {
                             {dashboardData?.appointments.map((appointment, index) => {
                             return <tr key={index} className='border-t border-gray-300'>
                                         <td className='p-3'> {appointment.appointment_id} </td>
-                                        <td className='p-3'>Patient #{appointment.patient} </td>
+                                        <td className='p-3'> {appointment.patient.full_name} </td>
                                         <td className='p-3'> {appointment.issues} </td>
                                         <td className='p-3'> 
                                             {new Date(appointment.appointment_date).toLocaleDateString()}
@@ -72,8 +72,8 @@ const Dashboard = () => {
                                             </span>
                                         </td>
                                         <td className='flex p-3 items-center '>
-                                            <FaEye size={19} className='mr-3 bg-gray-200'/>
-                                            <button className='flex gap-1 bg-red-300'>
+                                            <FaEye size={19} className='mr-3 bg-gray-200 hover:bg-gray-400'/>
+                                            <button className='flex gap-1 bg-red-300 hover:bg-red-500'>
                                                 Cancel Appointment <MdDelete size={19}/>
                                             </button>
                                         </td>
