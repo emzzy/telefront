@@ -4,23 +4,36 @@ import DashboardNavbar from '../components/DashboardNavbar';
 import Card from '../components/Card';
 import { FaCalendarAlt,  } from 'react-icons/fa';
 import { IoIosNotifications } from "react-icons/io";
-import api from '../api';
+// import api from '../api/api';
 import { MdDelete } from "react-icons/md";
 import { FaEye } from "react-icons/fa";
+import { useQuery } from '@tanstack/react-query';
+import { fetchDoctorData } from '../api/fetchData';
+import { useNavigate } from 'react-router-dom';
 
 
 const Dashboard = () => {
-    const [dashboardData, setDashboardData] = useState(null);
+    const { data: dashboardData, isError, isLoading } = useQuery({
+        queryKey: ['dashboardData'],
+        queryFn: fetchDoctorData,
+    });
+    const navigate = useNavigate();
+    const handleClick = (appointmentId) => {
+        navigate(`/appointment/${appointmentId}/`, {});
+    };
+
+    // const [dashboardData, setDashboardData] = useState(null);
     
-    useEffect(() => {
-        api.get('/doctor/dashboard/')
-        .then(res => setDashboardData(res.data))
-        .catch(err => console.error('Error fetching dashboard', err));
-    }, []);
+    // useEffect(() => {
+    //     api.get('/doctor/dashboard/')
+    //     .then(res => setDashboardData(res.data))
+    //     .catch(err => console.error('Error fetching dashboard', err)); 
+    // }, []);
     
     if (!dashboardData) {
         return <div> Loading........ </div>;
     }
+    if (isError) return <div> Error loading dashboard data...... </div>
     const totalAppointments = dashboardData.appointments.length || 0;
     const totalNotifications = dashboardData.notifications.length || 0;
 
@@ -51,7 +64,11 @@ const Dashboard = () => {
                         </thead>
                         <tbody>
                             {dashboardData?.appointments.map((appointment, index) => {
-                            return <tr key={index} className='border-t border-gray-300'>
+                            return <tr 
+                                        key={index} 
+                                        className='border-t border-gray-300' 
+                                        onClick={() => handleClick(appointment.appointment_id)}
+                                    >
                                         <td className='p-3'> {appointment.appointment_id} </td>
                                         <td className='p-3'> {appointment.patient.full_name} </td>
                                         <td className='p-3'> {appointment.issues} </td>
