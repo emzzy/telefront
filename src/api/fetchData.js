@@ -5,7 +5,7 @@ export const fetchDoctorData = async () => {
     return res.data;
 };
 
-export const getAppointments = async () => {
-    const res = await api.get(`/doctor/appointments/${appointmentId}/`);
+export const getAppointments = async (appointmentId) => {
+    const res = await api.get(`/doctor/appointment/${appointmentId}/`);
     return res.data;
 };
