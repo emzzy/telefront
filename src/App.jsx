@@ -16,6 +16,10 @@ import { AppointmentFormProvider } from "./context/AppointmentFormContext";
 import { AppointmentProvider } from "./context/AppointmentContext";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import Dashboard from "./pages/Dashboard";
+import Appointment from "./pages/Appointment";
+import ThemeContextProvider from "./context/ThemeContextProvider";
+
+
 
 function Logout() {
   localStorage.clear();
@@ -68,6 +72,7 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/about-us" element={<AboutUs />} />
               <Route path="/payment-success" element={<PaymentSuccess />} />
+              <Route path="/appointment/:appointmentId/" element={<Appointment />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
