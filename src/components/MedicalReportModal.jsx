@@ -6,12 +6,11 @@ import { useParams } from 'react-router-dom'
 
 const MedicalReportModal = ({ showModal, closeModal }) => {
     const { appointmentId } = useParams();
-    console.log(`Appointment Id Is = ${appointmentId}`)
-    if (!showModal) return null;
     const modalRef = useRef();
     const [formData, setFormData] = useState({ treatment: "", diagnosis: "" });
+
     const mutation = useMutation({
-        mutaionFn: (data) => addMedicalreport(appointmentId, data),
+        mutationFn: (data) => addMedicalreport(appointmentId, data),
         onSuccess: () => {
             closeModal();
         },
@@ -20,6 +19,7 @@ const MedicalReportModal = ({ showModal, closeModal }) => {
             console.error(error);
         },
     });
+
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
@@ -40,6 +40,8 @@ const MedicalReportModal = ({ showModal, closeModal }) => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, [closeModal]);
+
+    if (!showModal) return null;
 
     return (
         <>
@@ -71,14 +73,13 @@ const MedicalReportModal = ({ showModal, closeModal }) => {
                         <div className='flex justify-end gap-2'>
                             <button
                                 className='px-4 py-2 border border-gray-300 rounded hover:bg-green-200'
-                                type='submit'
-                                onClick={() => addMedicalreport(appointmentId)}                   
+                                type='submit'                   
                             >
                                 {mutation.isLoading ? 'Saving...' : 'Save'}
                             </button>
                             <button
                                 className='px-4 py-2 border border-gray-300 rounded hover:bg-red-200'
-                                type='submit'
+                                type='button'
                                 onClick={closeModal}
                             >
                                 Cancel
