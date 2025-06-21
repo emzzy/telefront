@@ -21,6 +21,6 @@ export const completeAppointment = async (appointmentId) => {
 };
 
 export const addMedicalreport = async (appointmentId, data) => {
-    const res = await api.post(`/doctor/appointment/${appointmentId}/add-record/`);
+    const res = await api.post(`/doctor/appointment/${appointmentId}/add-record/`, data);
     return res.data;
 }
