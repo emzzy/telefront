@@ -1,22 +1,22 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { addMedicalreport, editMedicalReport } from '../api/fetchData';
-import { useMutation } from '@tanstack/react-query'
-import { useParams } from 'react-router-dom'
+import { data, useParams } from 'react-router-dom';
+import { addLabReport } from '../api/fetchData';
+import { useMutation } from '@tanstack/react-query';
 
 
-const MedicalReportModal = ({ showMedicalReportModal, closeModal, onSuccess }) => {
+const AddLabReportModal = ({ showLabReportModal, closeModal, onSuccess }) => {
     const { appointmentId } = useParams();
     const modalRef = useRef();
-    const [formData, setFormData] = useState({ treatment: "", diagnosis: "" });
+    const [formData, setFormData] = useState({ test_name: "", description: "", result: "" });
 
     const mutation = useMutation({
-        mutationFn: (data) => addMedicalreport(appointmentId, data),
+        mutationFn: (data) => addLabReport(appointmentId, data),
         onSuccess: () => {
             onSuccess();
             closeModal();
         },
         onError: (error) => {
-            alert('Failed to save medical report.')
+            alert('Failed to save Lab Report. Try again');
             console.error(error);
         },
     });
@@ -28,6 +28,7 @@ const MedicalReportModal = ({ showMedicalReportModal, closeModal, onSuccess }) =
     const handleSubmit = (e) => {
         e.preventDefault();
         mutation.mutate(formData);
+        console.log('Submitting Lab Test Data:', formData);
     };
 
     useEffect(() => {
@@ -40,35 +41,43 @@ const MedicalReportModal = ({ showMedicalReportModal, closeModal, onSuccess }) =
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
-    }, [closeModal]);
-
-    if (!showMedicalReportModal) return null;
-
+        }, [closeModal]);
+    
+    if (!showLabReportModal) return null; 
+    
     return (
         <>
             <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50'>
-                <div 
-                    ref={modalRef} 
-                    className='bg-white p-6 rounded shadow-lg w-full max-w-lg'
-                >
+                <div ref={modalRef} className='bg-white p-6 rounded shadow-lg w-full max-w-lg'>
                     <form onSubmit={handleSubmit}>
                         <div className='mb-4'>
-                            <label className='block font-medium mb-1'> Diagnosis </label>
+                            <label className='block font-medium mb-1'> Test Name </label>
                             <input
                                 type="text"
-                                name='diagnosis'
+                                name='test_name'
                                 className='w-full border border-gray-300 p-2 rounded'
-                                value={formData.diagnosis}
+                                value={formData.test_name}
                                 onChange={handleChange}
                                 required
                             />
                         </div>
                         <div>
-                            <label className='block font-medium'> Treatment </label>
+                            <label className='block font-medium'> Description </label>
                             <textarea
-                                name='treatment'
+                                name='description'
                                 className='w-full border border-gray-300 p-2 rounded'
-                                value={formData.treatment}
+                                value={formData.description}
+                                onChange={handleChange}
+                                rows={4}
+                                required
+                            />
+                        </div>
+                        <div>
+                            <label className='block font-medium'> Result </label>
+                            <textarea
+                                name='result'
+                                className='w-full border border-gray-300 p-2 rounded'
+                                value={formData.result}
                                 onChange={handleChange}
                                 rows={4}
                                 required
@@ -91,9 +100,8 @@ const MedicalReportModal = ({ showMedicalReportModal, closeModal, onSuccess }) =
                         </div>
                     </form>
                 </div>
-            </div>
+            </div>        
         </>
     )
 };
-
-export default MedicalReportModal;
+export default AddLabReportModal;

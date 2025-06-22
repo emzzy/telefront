@@ -16,6 +16,7 @@ const Appointment = () => {
     });
 
     const queryClient = useQueryClient();
+
     const handleMedicalReportSaved = () => {
         queryClient.invalidateQueries(['appointmentDetail', appointmentId]);
         setShowMedicalReportModal(false);
@@ -72,7 +73,7 @@ const Appointment = () => {
             <div>
                 <h1 className='text-2xl font-semibold mb-4'> Medical Reports </h1>
                 <button
-                    className='px-4 py-2 bg-blue-400 text-white rounded'
+                    className='flex items-center gap-2 px-4 py-2 border-gray-300 bg-blue-200 hover:bg-blue-400 text-white rounded'
                     onClick={() => setShowMedicalReportModal(true)}
                 >
                     Add Medical Report <IoMdAdd className='w-5 h-5' />
@@ -81,7 +82,7 @@ const Appointment = () => {
                     showMedicalReportModal={showMedicalReportModal}
                     closeModal={() => setShowMedicalReportModal(false)}
                     onSuccess={handleMedicalReportSaved}
-                />                
+                />
                 {medical_records && medical_records.length > 0 ? (
                     medical_records.map((record, index) => (
                         <div key={index} className='mt-4 border p-4 rounded shadow-sm'>
@@ -115,7 +116,7 @@ const Appointment = () => {
                 {lab_tests && lab_tests.length > 0 ? (
                     lab_tests.map((record, index) => (
                         <div key={index} className='mt-4 border p-4 rounded shadow-sm'>
-                            <p> <strong> Test Name: </strong> {record.testName} </p>
+                            <p> <strong> Test Name: </strong> {record.test_name} </p>
                             <p> <strong> Description: </strong> {record.description} </p>
                             <p> <strong> Result: </strong> {record.result} </p>
                             <button
