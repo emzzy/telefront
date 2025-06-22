@@ -4,6 +4,8 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import MedicalReportModal from '../components/MedicalReportModal';
 import { FaEdit } from "react-icons/fa";
+import { IoMdAdd } from "react-icons/io";
+import AddLabReportModal from '../components/AddLabReportModal';
 
 
 const Appointment = () => {
@@ -16,11 +18,16 @@ const Appointment = () => {
     const queryClient = useQueryClient();
     const handleMedicalReportSaved = () => {
         queryClient.invalidateQueries(['appointmentDetail', appointmentId]);
-        setShowModal(false);
+        setShowMedicalReportModal(false);
+    };
+    const handleLabReportSaved = () => {
+        queryClient.invalidateQueries(['appointmentDetail', appointmentId]);
+        setShowLabReportModal(false);
     };
 
     const [buttonAction, setButtonAction] = useState(false);
-    const [showModal, setShowModal] = useState(false);
+    const [showMedicalReportModal, setShowMedicalReportModal] = useState(false);
+    const [showLabReportModal, setShowLabReportModal] = useState(false);
     
     if (!appointmentDetail) return <div> Loading.... </div>;
 
@@ -66,16 +73,15 @@ const Appointment = () => {
                 <h1 className='text-2xl font-semibold mb-4'> Medical Reports </h1>
                 <button
                     className='px-4 py-2 bg-blue-400 text-white rounded'
-                    onClick={() => setShowModal(true)}
+                    onClick={() => setShowMedicalReportModal(true)}
                 >
-                    Add Medical Report 
+                    Add Medical Report <IoMdAdd className='w-5 h-5' />
                 </button>
-                <MedicalReportModal 
-                    showModal={showModal}
-                    closeModal={() => setShowModal(false)}
+                <MedicalReportModal
+                    showMedicalReportModal={showMedicalReportModal}
+                    closeModal={() => setShowMedicalReportModal(false)}
                     onSuccess={handleMedicalReportSaved}
-                />
-                
+                />                
                 {medical_records && medical_records.length > 0 ? (
                     medical_records.map((record, index) => (
                         <div key={index} className='mt-4 border p-4 rounded shadow-sm'>
@@ -92,10 +98,38 @@ const Appointment = () => {
                     <p className='mt-2'> No medical records yet. </p>
                 )}
             </div>
-
+            
             <div>
                 <h1 className='text-2xl font-semibold mb-4'> Lab Test Reports </h1>
+                <button
+                    className='flex items-center gap-2 px-4 py-2 border-gray-300 bg-blue-200 hover:bg-blue-400 text-white rounded'
+                    onClick={() => setShowLabReportModal(true)}
+                >
+                    <span> Add Lab Test </span> <IoMdAdd className='w-5 h-5' />
+                </button>
+                <AddLabReportModal
+                    showLabReportModal={showLabReportModal}
+                    closeModal={() => setShowLabReportModal(false)}
+                    onSuccess={handleLabReportSaved}
+                />
+                {lab_tests && lab_tests.length > 0 ? (
+                    lab_tests.map((record, index) => (
+                        <div key={index} className='mt-4 border p-4 rounded shadow-sm'>
+                            <p> <strong> Test Name: </strong> {record.testName} </p>
+                            <p> <strong> Description: </strong> {record.description} </p>
+                            <p> <strong> Result: </strong> {record.result} </p>
+                            <button
+                                className='flex items-center gap-2 px-4 py-2 border border-gray-300 bg-blue-200 hover:bg-blue-400 text-white rounded'
+                            >
+                                <span>Edit</span> <FaEdit className='w-5 h-5' />
+                            </button>
+                        </div>
+                    ))
+                ) : (
+                    <p className='mt-2'> No lab result yet. </p>
+                )}
             </div>
+            
             <div>
                 <h1 className='text-2xl font-semibold mb-4'> Prescription </h1>
             </div>
