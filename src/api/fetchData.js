@@ -30,7 +30,12 @@ export const editMedicalReport = async (appointmentId, reportId, data) => {
     return res.data;
 };
 
-export const addLabReport = async (appointmentId) => {
+export const addLabReport = async (appointmentId, data) => {
     const res = await api.post(`/doctor/appointment/${appointmentId}/add-lab-test/`, data);
+    return res.data;
+};
+
+export const editLabTest = async (appointmentId, labTestId, updateData) => {
+    const res = await api.post(`/doctor/appointment/${appointmentId}/lab_tests/${labTestId}/edit/`, updateData);
     return res.data;
 };

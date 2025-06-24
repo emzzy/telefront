@@ -6,6 +6,7 @@ import MedicalReportModal from '../components/MedicalReportModal';
 import { FaEdit } from "react-icons/fa";
 import { IoMdAdd } from "react-icons/io";
 import AddLabReportModal from '../components/AddLabReportModal';
+import EditLabReportModal from '../components/EditLabReportModal';
 
 
 const Appointment = () => {
@@ -29,7 +30,9 @@ const Appointment = () => {
     const [buttonAction, setButtonAction] = useState(false);
     const [showMedicalReportModal, setShowMedicalReportModal] = useState(false);
     const [showLabReportModal, setShowLabReportModal] = useState(false);
-    
+    const [editLabTestData, setEditLabTestData] = useState(null);
+    const [showEditModal, setShowEditModal] = useState(false);
+        
     if (!appointmentDetail) return <div> Loading.... </div>;
 
     const { appointment, medical_records, lab_tests, prescription } = appointmentDetail;
@@ -121,13 +124,27 @@ const Appointment = () => {
                             <p> <strong> Result: </strong> {record.result} </p>
                             <button
                                 className='flex items-center gap-2 px-4 py-2 border border-gray-300 bg-blue-200 hover:bg-blue-400 text-white rounded'
+                                onClick={() => {
+                                    setEditLabTestData(record); 
+                                    setShowEditModal(true);
+                                }}
                             >
                                 <span>Edit</span> <FaEdit className='w-5 h-5' />
-                            </button>
+                            </button>                            
                         </div>
                     ))
                 ) : (
                     <p className='mt-2'> No lab result yet. </p>
+                )}
+
+                {showEditModal && editLabTestData && (
+                    <EditLabReportModal
+                        showModal={showEditModal}
+                        closeModal={() => setShowEditModal(false)}
+                        appointmentId={appointmentId}
+                        labTest={editLabTestData}
+                        onSuccess={handleLabReportSaved}
+                    />
                 )}
             </div>
             
