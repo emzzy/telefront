@@ -44,3 +44,8 @@ export const getPayments = async () => {
     const res = await api.get('/doctor/payments/');
     return res.data;
 };
+
+export const getNotifications = async () => {
+    const res = await api.get('/doctor/notifications/');
+    return res.data;
+};

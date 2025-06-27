@@ -19,6 +19,7 @@ import Dashboard from "./pages/Dashboard";
 import Appointment from "./pages/Appointment";
 import ThemeContextProvider from "./context/ThemeContextProvider";
 import Payments from "./pages/Payments";
+import Notifications from "./pages/Notifications";
 
 
 function Logout() {
@@ -60,6 +61,7 @@ function AppRoutes() {
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/payment-success" element={<PaymentSuccess />} />
         <Route path="/payments" element={<Payments />} />
+        <Route path="/notifications" element={<Notifications />} />
 
         <Route
           path="/appointment/:appointmentId/"
