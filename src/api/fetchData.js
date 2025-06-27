@@ -39,3 +39,8 @@ export const editLabTest = async (appointmentId, labTestId, updateData) => {
     const res = await api.post(`/doctor/appointment/${appointmentId}/lab_tests/${labTestId}/edit/`, updateData);
     return res.data;
 };
+
+export const getPayments = async () => {
+    const res = await api.get('/doctor/payments/');
+    return res.data;
+};

@@ -26,6 +26,7 @@ const Appointment = () => {
         queryClient.invalidateQueries(['appointmentDetail', appointmentId]);
         setShowLabReportModal(false);
     };
+    
 
     const [buttonAction, setButtonAction] = useState(false);
     const [showMedicalReportModal, setShowMedicalReportModal] = useState(false);
