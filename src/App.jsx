@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
@@ -18,7 +18,7 @@ import PaymentSuccess from "./pages/PaymentSuccess";
 import Dashboard from "./pages/Dashboard";
 import Appointment from "./pages/Appointment";
 import ThemeContextProvider from "./context/ThemeContextProvider";
-
+import Payments from "./pages/Payments";
 
 
 function Logout() {
@@ -26,55 +26,58 @@ function Logout() {
   return <Navigate to="/login" />;
 }
 
-// function RegisterAndLogout() {
-//   localStorage.clear()
-//   return <Register />
-// }
+function AppRoutes() {
+  const location = useLocation();
+  const hideNavbarRoutes = ["/login", "/register", "/dashboard"];
+
+  const shouldHideNavbar = hideNavbarRoutes.includes(location.pathname);
+
+  return (
+    <>
+      {!shouldHideNavbar && <Navbar />}
+
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/select-role" element={<SelectRole />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/logout" element={<Logout />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/service/:serviceId" element={<ServiceDetail />} />
+        <Route
+          path="/book-appointment/:serviceId/:doctorId"
+          element={<BookAppointment />}
+        />
+        <Route path="/checkout/:billingId" element={<Checkout />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/about-us" element={<AboutUs />} />
+        <Route path="/payment-success" element={<PaymentSuccess />} />
+        <Route path="/payments" element={<Payments />} />
+
+        <Route
+          path="/appointment/:appointmentId/"
+          element={<Appointment />}
+        />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </>
+  );
+}
 
 function App() {
-  // const [message, setMessage] = useState("");
-
-  // useEffect(() => {
-  //   const query = new URLSearchParams(window.location.search);
-  //   if (query.get("success")){
-  //     setMessage("Order placed! You will receive an email confirmation.")
-  //   }
-  //   if (query.get("canceled")){
-  //     setMessage(
-  //       "Order canceled -- continue to shop around and checkout when you're ready."
-  //     );
-  //   }
-  // }, []);
-
   return (
     <>
       <AppointmentFormProvider>
         <AppointmentProvider>
           <BrowserRouter>
-            <Navbar />
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <ProtectedRoute>
-                    <Home />
-                  </ProtectedRoute>
-                }
-              />
-              <Route path="/select-role" element={<SelectRole />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/logout" element={<Logout />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/service/:serviceId" element={<ServiceDetail />} />
-              <Route path="/book-appointment/:serviceId/:doctorId" element={<BookAppointment />} />
-              <Route path="/checkout/:billingId" element={<Checkout />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/about-us" element={<AboutUs />} />
-              <Route path="/payment-success" element={<PaymentSuccess />} />
-              <Route path="/appointment/:appointmentId/" element={<Appointment />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+            <AppRoutes />
           </BrowserRouter>
         </AppointmentProvider>
       </AppointmentFormProvider>
