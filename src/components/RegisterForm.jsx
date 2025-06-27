@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import api from "../api";
+import api from "../api/api";
 import { validateEmail } from "../utils";
 import { data, useNavigate } from "react-router-dom";
 import "../styles/RegisterForm.css";
