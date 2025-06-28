@@ -49,3 +49,8 @@ export const getNotifications = async () => {
     const res = await api.get('/doctor/notifications/');
     return res.data;
 };
+
+export const markNotification = async (id) => {
+    const res = await api.patch(`/doctor/notifications/${id}/seen/`);
+    return res.data;
+};

@@ -2,6 +2,7 @@ import React from 'react'
 import { FaBars, FaCog, FaHome, FaSignOutAlt, FaUserAlt, FaEdit, FaCalendarAlt } from 'react-icons/fa';
 import { IoIosNotifications } from "react-icons/io";
 import { MdOutlinePayment } from "react-icons/md";
+import { Link } from 'react-router-dom';
 
 
 const SideBar = ({ doctor }) => {
@@ -29,15 +30,15 @@ const SideBar = ({ doctor }) => {
                     </li>
                     <li className='flex items-center py-3 px-2 space-x-4 hover:bg-gray-300 hover:rounded cursor-pointer dark:hover:bg-gray-600'>
                         <FaCalendarAlt size={20} />
-                        <span className='ml-4 block md:block'> Appointment </span>
+                        <span className='ml-4 block md:block'> Appointments </span>
                     </li>
                     <li className='flex items-center py-3 px-2 space-x-4 hover:bg-gray-300 hover:rounded cursor-pointer dark:hover:bg-gray-600'>
-                        <MdOutlinePayment size={20} />
-                        <span className='ml-4 md:block'> Payments </span>
+                        <Link to='/payments' className='flex'> <MdOutlinePayment size={20} />
+                        <span className='ml-4 md:block'> Payments </span> </Link>
                     </li>
                     <li className='flex items-center py-3 px-2 space-x-4 hover:bg-gray-300 hover:rounded cursor-pointer dark:hover:bg-gray-600'>
-                        <IoIosNotifications size={20} />
-                        <span className='ml-4 md:block'> Notification </span>
+                        <Link to='/notifications' className='flex'> <IoIosNotifications size={21} />
+                        <span className='ml-4 md:block'> Notifications </span> </Link>
                     </li>
                     <li className='flex items-center py-3 px-2 space-x-4 hover:bg-gray-300 hover:rounded cursor-pointer dark:hover:bg-gray-600'>
                         <FaEdit size={20} />

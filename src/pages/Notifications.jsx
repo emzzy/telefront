@@ -1,7 +1,7 @@
 import React from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { getNotifications } from '../api/fetchData';
-import { FaEye } from 'react-icons/fa';
+import { useQuery, useMutation, QueryClient } from '@tanstack/react-query';
+import { getNotifications, markNotification } from '../api/fetchData';
+import { FaEye, FaCheckDouble } from 'react-icons/fa';
 import moment from 'moment';
 
 const Notifications = () => {
@@ -9,6 +9,14 @@ const Notifications = () => {
         queryKey: ['notifications'],
         queryFn: getNotifications,
     });
+
+    const mutation = useMutation({
+        mutationFn: markNotification,
+        onSuccess: () => {
+            QueryClient.invalidateQueries(['notifications']);
+        },
+    });
+    
 
     if (isLoading) return <div>Loading notifications...</div>;
     if (isError) return <div>Error loading notifications.</div>;
@@ -45,8 +53,11 @@ const Notifications = () => {
                                     )}
                                 </td>
                                 <td className="p-4">
-                                    <button className="text-blue-600 hover:text-blue-800">
-                                    <FaEye />
+                                    <button
+                                        className="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full hover:bg-yellow-200"
+                                        onClick={() => mutation.mutate(notif.id)}
+                                    >
+                                        Mark as seen <FaCheckDouble />
                                     </button>
                                 </td>
                             </tr>
