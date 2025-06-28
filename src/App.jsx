@@ -29,7 +29,7 @@ function Logout() {
 
 function AppRoutes() {
   const location = useLocation();
-  const hideNavbarRoutes = ["/login", "/register", "/dashboard"];
+  const hideNavbarRoutes = ["/login", "/register", "/dashboard", "/payments"];
 
   const shouldHideNavbar = hideNavbarRoutes.includes(location.pathname);
 
