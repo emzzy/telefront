@@ -1,3 +1,4 @@
+import { data } from "react-router-dom";
 import api from "./api";
 
 export const fetchDoctorData = async () => {
@@ -52,5 +53,15 @@ export const getNotifications = async () => {
 
 export const markNotification = async (id) => {
     const res = await api.patch(`/doctor/notifications/${id}/seen/`);
+    return res.data;
+};
+
+export const getDoctorDetails = async () => {
+    const res = await api.get(`/doctor/profile/`);
+    return res.data;
+};
+
+export const updateDoctorDetails = async () => {
+    const res = await api.put(`/doctor/profile/`, data);
     return res.data;
 };

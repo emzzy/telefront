@@ -20,6 +20,7 @@ import Appointment from "./pages/Appointment";
 import ThemeContextProvider from "./context/ThemeContextProvider";
 import Payments from "./pages/Payments";
 import Notifications from "./pages/Notifications";
+import EditDoctorProfile from "./pages/EditDoctorProfile";
 
 
 function Logout() {
@@ -29,7 +30,7 @@ function Logout() {
 
 function AppRoutes() {
   const location = useLocation();
-  const hideNavbarRoutes = ["/login", "/register", "/dashboard", "/payments"];
+  const hideNavbarRoutes = ["/login", "/register", "/dashboard", "/edit-profile", "/payments"];
 
   const shouldHideNavbar = hideNavbarRoutes.includes(location.pathname);
 
@@ -52,21 +53,15 @@ function AppRoutes() {
         <Route path="/register" element={<Register />} />
         <Route path="/services" element={<Services />} />
         <Route path="/service/:serviceId" element={<ServiceDetail />} />
-        <Route
-          path="/book-appointment/:serviceId/:doctorId"
-          element={<BookAppointment />}
-        />
+        <Route path="/book-appointment/:serviceId/:doctorId" element={<BookAppointment />} />
         <Route path="/checkout/:billingId" element={<Checkout />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/payment-success" element={<PaymentSuccess />} />
         <Route path="/payments" element={<Payments />} />
         <Route path="/notifications" element={<Notifications />} />
-
-        <Route
-          path="/appointment/:appointmentId/"
-          element={<Appointment />}
-        />
+        <Route path="/appointment/:appointmentId/" element={<Appointment />} />
+        <Route path="/edit-profile" element={<EditDoctorProfile />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
