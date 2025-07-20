@@ -15,12 +15,13 @@ import Checkout from "./pages/Checkout";
 import { AppointmentFormProvider } from "./context/AppointmentFormContext";
 import { AppointmentProvider } from "./context/AppointmentContext";
 import PaymentSuccess from "./pages/PaymentSuccess";
-import Dashboard from "./pages/Dashboard";
 import Appointment from "./pages/Appointment";
 import ThemeContextProvider from "./context/ThemeContextProvider";
 import Payments from "./pages/Payments";
 import Notifications from "./pages/Notifications";
 import EditDoctorProfile from "./pages/EditDoctorProfile";
+import Doctordashboard from "./pages/Doctordashboard";
+import PatientDashboard from "./pages/patient/PatientDashboard";
 
 
 function Logout() {
@@ -37,7 +38,6 @@ function AppRoutes() {
   return (
     <>
       {!shouldHideNavbar && <Navbar />}
-
       <Routes>
         <Route
           path="/"
@@ -55,7 +55,8 @@ function AppRoutes() {
         <Route path="/service/:serviceId" element={<ServiceDetail />} />
         <Route path="/book-appointment/:serviceId/:doctorId" element={<BookAppointment />} />
         <Route path="/checkout/:billingId" element={<Checkout />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Doctordashboard />} />
+        <Route path="/dashboard/patient" element={<PatientDashboard />} />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/payment-success" element={<PaymentSuccess />} />
         <Route path="/payments" element={<Payments />} />

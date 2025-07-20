@@ -65,3 +65,9 @@ export const updateDoctorDetails = async () => {
     const res = await api.put(`/doctor/profile/`, data);
     return res.data;
 };
+
+// Patient data
+export const fetchPatientData = async () => {
+    const res = await api.get(`/patient/dashboard/`);
+    return res.data;
+};

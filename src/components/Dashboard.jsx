@@ -12,12 +12,16 @@ import { useNavigate } from 'react-router-dom';
 
 const Dashboard = ({ userType, userData, appointments, notifications = [] }) => {
     const navigate = useNavigate();
+
+    if (!userData) {
+        return <div className='p-6'>Loading dashboard....</div>;
+    }
     const handleClick = (appointmentId) => {
         navigate(`/appointment/${appointmentId}/`, {});
     };
     
-    // const totalAppointments = appointments.length || 0;
-    // const totalNotifications = notifications.length || 0;
+    const totalAppointments = appointments.length || 0;
+    const totalNotifications = notifications.length || 0;
 
     return (
         <div className='flex'>
@@ -29,8 +33,8 @@ const Dashboard = ({ userType, userData, appointments, notifications = [] }) => 
                     <h2> Dashboard </h2>
                     
                     <div className='grid grid-cols-2 p-2 md:grid-cols-4 lg:grid-cols-4 gap-4 mb-6'>
-                        {/* <Card icon={<FaCalendarAlt />} title='Appointments' value={totalAppointments} />
-                        <Card icon={<IoIosNotifications />} title='Notifications' value={totalNotifications} /> */}
+                        <Card icon={<FaCalendarAlt />} title='Appointments' value={totalAppointments} />
+                        <Card icon={<IoIosNotifications />} title='Notifications' value={totalNotifications} />
                     </div>
 
                     <table className='w-full border-collapse border-t border-b border-gray-300 dark:hover:bg-gray-900 transition-colours hover:rounded'>
