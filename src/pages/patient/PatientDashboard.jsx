@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react'
 import Dashboard from '../../components/Dashboard';
 import { fetchPatientData } from '../../api/fetchData';
+import Notifications from '../Notifications';
 
 
 const PatientDashboard = () => {
-    const { data: patientDashboardData, isLoading, isError } = useQuery({
+    const { data, isLoading, isError } = useQuery({
         queryKey: ['patientDashboardData'],
         queryFn: fetchPatientData,
     });
@@ -14,12 +14,15 @@ const PatientDashboard = () => {
     if (isError) return <div>Error loading patient data</div>
 
     return (
-        <Dashboard
-            userType='patient'
-            userData={patientDashboardData.patient}
-            appointments={patientDashboardData.appointments}
-            notifications={patientDashboardData.notifications}
-        />
+        <>
+            <Dashboard
+                userType='patient'
+                userData={data.patient}
+                appointments={data.appointments}
+                notifications={data.notifications}
+                totalSpent={data.total_spent}
+            />
+        </>
     );
 };
 export default PatientDashboard;

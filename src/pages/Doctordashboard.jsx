@@ -2,11 +2,9 @@ import React from 'react'
 import { fetchDoctorData } from '../api/fetchData';
 import { useQuery } from '@tanstack/react-query';
 import Dashboard from '../components/Dashboard';
-import SideBar from '../components/SideBar';
-// import { data } from 'react-router-dom';
 
 
-const Doctordashboard = () => {
+const DoctorDashboard = () => {
     const { data, isError, isLoading } = useQuery({
         queryKey: ['doctorDashboardData'],
         queryFn: fetchDoctorData,
@@ -17,13 +15,13 @@ const Doctordashboard = () => {
 
     return (
         <>
-        <Dashboard
-            userType='doctor'
-            userData={data.doctor}
-            appointments={data.appointments}
-            notifications={data.notifications}
-        />
+            <Dashboard
+                userType='doctor'
+                userData={data.doctor}
+                appointments={data.appointments}
+                notifications={data.notifications}
+            />
         </>
     );
 };
-export default Doctordashboard;
+export default DoctorDashboard;
