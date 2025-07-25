@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react'
 import { fetchPatientData } from '../../api/fetchData';
-import { formatDateForInput, formatDateForDisplay } from '../../utils/dateHelpers';
+import { formatDateForDateInput, formatDateForDisplay } from '../../utils/dateHelpers';
 
 const EditPatientProfile = () => {
     const  { data: patientData, isLoading, isError } = useQuery({
@@ -18,9 +18,24 @@ const EditPatientProfile = () => {
                 <div className="flex items-center justify-between mb-6">
                     <h2 className="text-2xl font-semibold text-gray-800">Edit profile</h2>
                     <img
-                        src={`http://localhost:8000${patientData.patient.image}`}
+                        src={`http://localhost:8000${patientData.patient.image}`}            
                         alt="Profile"
-                        className="w-14 h-20 rounded-full object-cover"
+                        className="w-32 h-32 rounded-full object-cover"
+                        onClick={() => document.getElementById('upload_image').click()}
+                    />
+                    <div className='absolute insert-0 flex items-center justify-center bg-black bg-opacity-50 rounded-full opacity-0 hover:opacity-100 transition-opacity cursor-pointer'
+                        onClick={() => document.getElementById('upload_image').click()}>
+                        <span className='text-white text-sm'> Change Photo </span>
+                    </div>
+                    <input 
+                        type="file" name='image' id='upload_image' hidden required 
+                        accept='image/*'
+                        onChange={(e) => {
+                            const file = e.target.files[0];
+                            if (file) {
+                                console.log('Selected file:', file)
+                            }
+                        }}
                     />
                 </div>
                 <form className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -48,6 +63,30 @@ const EditPatientProfile = () => {
                             className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500" 
                             defaultValue={patientData?.patient.user.email}
                         />
+                    </div>                    
+                    <div>
+                        <label className="block text-gray-600 mb-1">Contact Number</label>
+                        <input
+                            type="text"
+                            className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                            defaultValue={patientData?.patient.user.phone_number} 
+                        />
+                    </div>
+                    <div>
+                        <label className="block text-gray-600 mb-1">Gender</label>
+                        <input
+                            type="text"
+                            className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                            defaultValue={patientData?.patient.user.gender}
+                        />
+                    </div>
+                    <div>
+                        <label className="block text-gray-600 mb-1">Date of Birth</label>
+                        <input
+                            type="date"
+                            className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                            defaultValue={formatDateForDateInput(patientData?.patient.user.date_of_birth)}
+                        />
                     </div>
                     <div>
                         <label className="block text-gray-600 mb-1">Address</label>
@@ -57,21 +96,38 @@ const EditPatientProfile = () => {
                             defaultValue={patientData?.patient.user.location} 
                         />
                     </div>
-                    <div className="sm:col-span-2">
-                        <label className="block text-gray-600 mb-1">Contact Number</label>
+                    <div>
+                        <label className="block text-gray-600 mb-1">Age</label>
                         <input
-                            type="text"
+                            type="number"
                             className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                            defaultValue={patientData?.patient.user.phone_number} 
+                            defaultValue={patientData?.patient.age}
                         />
                     </div>
                     <div>
-                        <label className="block text-gray-600 mb-1">Password</label>
+                        <label className="block text-gray-600 mb-1">Emergency Contact</label>
                         <input
-                            type="password"
-                            className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
-                            placeholder="Password" />
+                            type="text"
+                            className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                            defaultValue={patientData?.patient.emergency_contact}
+                        />
                     </div>
+                    <div>
+                        <label className="block text-gray-600 mb-1">Medical Information</label>
+                        <input
+                            type="text"
+                            className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                            defaultValue={patientData?.patient.medical_information} 
+                        />
+                    </div>
+                    <div>
+                        <label className="block text-gray-600 mb-1">Blood Group</label>
+                        <input
+                            type="text"
+                            className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                            defaultValue={patientData?.patient.blood_group} 
+                        />
+                    </div>                    
                     <div className="sm:col-span-2">
                         <label className="block text-gray-600 mb-1">Bio</label>
                         <input
@@ -85,8 +141,22 @@ const EditPatientProfile = () => {
                         <input
                             type="datetime-local"
                             className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                            defaultValue={formatDateForInput(patientData?.patient.available_appointment_date)}
+                            defaultValue={formatDateForDateInput(patientData?.patient.available_appointment_date)}
                         />
+                    </div>
+                    <div>
+                        <label className="block text-gray-600 mb-1">Password</label>
+                        <input
+                            type="password"
+                            className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+                            placeholder="Password" />
+                    </div>
+                    <div>
+                        <label className="block text-gray-600 mb-1">Confirm Password</label>
+                        <input
+                            type="password"
+                            className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+                            placeholder="Confirm Password" />
                     </div>
                     {/* Buttons */}
                     <div className="sm:col-span-2 flex justify-end gap-3 mt-4">

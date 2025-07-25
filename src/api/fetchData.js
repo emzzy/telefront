@@ -71,3 +71,13 @@ export const fetchPatientData = async () => {
     const res = await api.get(`/patient/dashboard/`);
     return res.data;
 };
+
+export const getPatientNotification = async () => {
+    const res = await api.get(`/patient/notifications/`);
+    return res.data;
+};
+
+export const updatePatientData = async () => {
+    const res = await api.put(`/patient/update-profile/`);
+    return res.data;
+};

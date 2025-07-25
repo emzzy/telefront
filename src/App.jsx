@@ -13,15 +13,15 @@ import BookAppointment from "./pages/BookAppointment";
 import "./styles/global.css";
 import Checkout from "./pages/Checkout";
 import { AppointmentFormProvider } from "./context/AppointmentFormContext";
-import { AppointmentProvider } from "./context/AppointmentContext";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import Appointment from "./pages/Appointment";
-import ThemeContextProvider from "./context/ThemeContextProvider";
 import Payments from "./pages/Payments";
 import Notifications from "./pages/Notifications";
 import EditDoctorProfile from "./pages/EditDoctorProfile";
-import Doctordashboard from "./pages/Doctordashboard";
+import DoctorDashboard from "./pages/DoctorDashboard";
 import PatientDashboard from "./pages/patient/PatientDashboard";
+import PatientNotifications from "./pages/patient/PatientNotification";
+import EditPatientProfile from "./pages/patient/EditPatientProfile";
 
 
 function Logout() {
@@ -47,6 +47,7 @@ function AppRoutes() {
             </ProtectedRoute>
           }
         />
+        {/* medical professional */}
         <Route path="/select-role" element={<SelectRole />} />
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
@@ -55,8 +56,11 @@ function AppRoutes() {
         <Route path="/service/:serviceId" element={<ServiceDetail />} />
         <Route path="/book-appointment/:serviceId/:doctorId" element={<BookAppointment />} />
         <Route path="/checkout/:billingId" element={<Checkout />} />
-        <Route path="/dashboard" element={<Doctordashboard />} />
-        <Route path="/dashboard/patient" element={<PatientDashboard />} />
+        <Route path="/dashboard" element={<DoctorDashboard />} />
+        {/* Patient view */}
+        <Route path="/patient/dashboard" element={<PatientDashboard />} />
+        <Route path="/patient/notifications" element={<PatientNotifications />} />
+        <Route path="/patient/edit-profile" element={<EditPatientProfile />} />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/payment-success" element={<PaymentSuccess />} />
         <Route path="/payments" element={<Payments />} />
@@ -73,11 +77,9 @@ function App() {
   return (
     <>
       <AppointmentFormProvider>
-        <AppointmentProvider>
-          <BrowserRouter>
-            <AppRoutes />
-          </BrowserRouter>
-        </AppointmentProvider>
+        <BrowserRouter>
+          <AppRoutes />
+        </BrowserRouter>
       </AppointmentFormProvider>
     </>
   );
