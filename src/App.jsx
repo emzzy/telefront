@@ -31,8 +31,9 @@ function Logout() {
 
 function AppRoutes() {
   const location = useLocation();
-  const hideNavbarRoutes = ["/login", "/register", "/dashboard", "/edit-profile", "/payments"];
-
+  const hideNavbarRoutes = [
+    "/login", "/register", "/dashboard", "/edit-profile", "/payments", "/patient/dashboard/", "/patient/edit-profile/", "/patient/notifications/"
+  ];
   const shouldHideNavbar = hideNavbarRoutes.includes(location.pathname);
 
   return (
@@ -61,6 +62,7 @@ function AppRoutes() {
         <Route path="/patient/dashboard" element={<PatientDashboard />} />
         <Route path="/patient/notifications" element={<PatientNotifications />} />
         <Route path="/patient/edit-profile" element={<EditPatientProfile />} />
+        
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/payment-success" element={<PaymentSuccess />} />
         <Route path="/payments" element={<Payments />} />

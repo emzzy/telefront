@@ -81,3 +81,8 @@ export const updatePatientData = async () => {
     const res = await api.put(`/patient/update-profile/`);
     return res.data;
 };
+
+export const getPatientAppointmentDetail = async (appointmentId) => {
+    const res = await api.get(`/patient/appointment/${appointmentId}detail/`);
+    return res.data;
+}
