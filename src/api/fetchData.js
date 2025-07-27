@@ -83,6 +83,16 @@ export const updatePatientData = async () => {
 };
 
 export const getPatientAppointmentDetail = async (appointmentId) => {
-    const res = await api.get(`/patient/appointment/${appointmentId}detail/`);
+    const res = await api.get(`/patient/appointment/${appointmentId}/detail/`);
     return res.data;
-}
+};
+
+export const cancelDoctorAppointment = async (appointmentId) => {
+    const res = await api.post(`/patient/appointment/${appointmentId}/cancel/`);
+    return res.data;
+};
+
+export const completeDoctorAppointment = async (appointmentId) => {
+    const res = await api.post(`/patient/appointment/${appointmentId}/complete/`);
+    return res.data;
+};
