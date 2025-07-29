@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../styles/Services.css";
-import api from "../api";
+import api from "../api/api";
 import { useNavigate } from "react-router-dom";
 
 const ServicesComponent = () => {
