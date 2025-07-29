@@ -18,15 +18,36 @@ function Form({ route, method }) {
 
     try {
       const res = await api.post(route, { email, password });
+
       if (method === "login") {
         localStorage.setItem(ACCESS_TOKEN, res.data.access);
         localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
-        navigate("/");
+
+        const currentUser = await api.get('/api/get-user/');
+        const user = currentUser.data;
+
+        if (user.data.is_patient) {
+          localStorage.setItem('userRole', 'patient');
+          return navigate("/");
+
+        } else if (user.data.is_medical_professional === true) {
+          localStorage.setItem('userRole', 'doctor');          
+          return navigate("/dashboard");
+
+        } else if (user.data.is_admin) {
+          localStorage.setItem('userRole', 'admin');
+
+        } else if (user.data.is_staff) {
+          localStorage.setItem('userRole', 'staff');
+
+        }
+        return navigate("/");
+
       } else {
         navigate("/login");
       }
     } catch (error) {
-      alert(error);
+      alert('Login failed. Please check your login credentials');
     } finally {
       setLoading(false);
     }
