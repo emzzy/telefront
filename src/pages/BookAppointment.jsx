@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useAppointmentContext } from '../context/AppointmentContext';
-import api from '../api';
+import api from '../api/api';
 import { useAppointmentForm } from '../context/AppointmentFormContext';
 
 function BookAppointment() {

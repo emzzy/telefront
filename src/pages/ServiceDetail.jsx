@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useAppointmentContext } from '../context/AppointmentContext';
-import api from '../api'
+import api from '../api/api'
 
 
 const ServiceDetail = () => {
@@ -9,8 +9,7 @@ const ServiceDetail = () => {
     const [service, setService] = useState(null);
     const { setServiceDetails, setDoctorDetails } = useAppointmentContext();
     const navigate = useNavigate();
-    
-    
+        
     useEffect(() => {
         api.get(`base/service/${serviceId}`)
         .then((res) => setService(res.data))
@@ -52,8 +51,7 @@ const ServiceDetail = () => {
             <div className='space-y-6'>
                 {service.available_doctors.map((doctor) => (
                     doctor.medicalprofessional ? (
-                        <div
-                            key={doctor.id}
+                        <div key={doctor.id}
                             className='flex items-center justify-between bg-white shadow-md rounded-lg p-6'
                         >
                             <div className='flex items-center space-x-4'>
@@ -87,12 +85,7 @@ const ServiceDetail = () => {
                     ) : null
                 ))}
             </div>
-            {/* <div className='available-doctors'>
-                <div className='service-doctor'>
-                    {service.available_doctors}
-                </div>
-            </div> */}
         </div>
     )
-}
+};
 export default ServiceDetail;

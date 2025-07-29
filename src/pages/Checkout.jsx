@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { data, useNavigate, useParams } from 'react-router-dom';
 import { useAppointmentForm } from '../context/AppointmentFormContext';
 import { useAppointmentContext } from '../context/AppointmentContext';
-import api from '../api';
+import api from '../api/api';
 import { PayPalButtons } from '@paypal/react-paypal-js';
 
 const Checkout = () => {

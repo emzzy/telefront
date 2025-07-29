@@ -22,17 +22,16 @@ import DoctorDashboard from "./pages/DoctorDashboard";
 import PatientDashboard from "./pages/patient/PatientDashboard";
 import PatientNotifications from "./pages/patient/PatientNotification";
 import EditPatientProfile from "./pages/patient/EditPatientProfile";
+import PatientAppointmentDetail from "./pages/patient/PatientAppointmentDetail";
+import PatientAppointments from "./pages/patient/PatientAppointments";
+import Dashboard from "./components/Dashboard";
 
-
-function Logout() {
-  localStorage.clear();
-  return <Navigate to="/login" />;
-}
 
 function AppRoutes() {
   const location = useLocation();
   const hideNavbarRoutes = [
-    "/login", "/register", "/dashboard", "/edit-profile", "/payments", "/patient/dashboard/", "/patient/edit-profile/", "/patient/notifications/"
+    "/login", "/register", "/dashboard", "/edit-profile", "/payments", "/patient/dashboard", "/patient/edit-profile", "/patient/notifications",
+    "/patient/appointment/:appointmentId/detail"
   ];
   const shouldHideNavbar = hideNavbarRoutes.includes(location.pathname);
 
@@ -51,18 +50,12 @@ function AppRoutes() {
         {/* medical professional */}
         <Route path="/select-role" element={<SelectRole />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/logout" element={<Logout />} />
         <Route path="/register" element={<Register />} />
         <Route path="/services" element={<Services />} />
         <Route path="/service/:serviceId" element={<ServiceDetail />} />
         <Route path="/book-appointment/:serviceId/:doctorId" element={<BookAppointment />} />
         <Route path="/checkout/:billingId" element={<Checkout />} />
         <Route path="/dashboard" element={<DoctorDashboard />} />
-        {/* Patient view */}
-        <Route path="/patient/dashboard" element={<PatientDashboard />} />
-        <Route path="/patient/notifications" element={<PatientNotifications />} />
-        <Route path="/patient/edit-profile" element={<EditPatientProfile />} />
-        
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/payment-success" element={<PaymentSuccess />} />
         <Route path="/payments" element={<Payments />} />
@@ -70,10 +63,18 @@ function AppRoutes() {
         <Route path="/appointment/:appointmentId/" element={<Appointment />} />
         <Route path="/edit-profile" element={<EditDoctorProfile />} />
         <Route path="*" element={<NotFound />} />
+
+        {/* Patient view */}
+        <Route path="/patient/dashboard" element={<PatientDashboard userType='patient' />}>
+          <Route path="appointments" element={<PatientAppointments />} />
+        </Route>
+        <Route path="/patient/edit-profile" element={<EditPatientProfile />} />
+        <Route path="/patient/notifications" element={<PatientNotifications />} />
+        <Route path="/patient/appointment/:appointmentId/detail" element={<PatientAppointmentDetail />} />
       </Routes>
     </>
   );
-}
+};
 
 function App() {
   return (
@@ -85,6 +86,6 @@ function App() {
       </AppointmentFormProvider>
     </>
   );
-}
+};
 
 export default App;

@@ -7,7 +7,7 @@ function Login() {
       <p className="flex flex-col items-center justify-center px-4 text-center">
         Not registered?
         <a
-          href="/register"
+          href="/select-role"
           className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded transition"
         >
           Register
