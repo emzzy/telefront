@@ -18,7 +18,7 @@ import Appointment from "./pages/Appointment";
 import Payments from "./pages/Payments";
 import Notifications from "./pages/Notifications";
 import EditDoctorProfile from "./pages/EditDoctorProfile";
-import DoctorDashboard from "./pages/DoctorDashboard";
+import DoctorDashboard from "./pages/doctor/DoctorDashboard";
 import PatientDashboard from "./pages/patient/PatientDashboard";
 import PatientNotifications from "./pages/patient/PatientNotification";
 import EditPatientProfile from "./pages/patient/EditPatientProfile";

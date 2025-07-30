@@ -1,7 +1,7 @@
 import React from 'react'
-import { fetchDoctorData } from '../api/fetchData';
+import { fetchDoctorData } from '../../api/fetchData';
 import { useQuery } from '@tanstack/react-query';
-import Dashboard from '../components/Dashboard';
+import Dashboard from '../../components/Dashboard';
 
 
 const DoctorDashboard = () => {

@@ -10,7 +10,11 @@ const EditLabReportModal = ({ showModal, closeModal, appointmentId, labTest, onS
         result: ""
     });
 
-    const queryClient = useQuery();
+    // const { data, isLoading, error } = useQuery({
+    //     queryKey: ['lab-report', labTest?.id],
+    //     queryFn: () => fetchLabReport(labTest?.id),
+    //     enabled: 
+    // } []);
 
     useEffect(() => {
         if(labTest) {

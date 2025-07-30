@@ -31,7 +31,7 @@ const SideBar = ({ userData, userType }) => {
             {
                 icon: <FaCalendarAlt size={20} />,
                 label: 'Appointments',
-                link: userType === 'doctor' ? '/appointments' : '/patient/dashboard'
+                link: userType === 'doctor' ? '/appointments' : '/patient/dashboard/appointments'
             },
             {
                 icon: <IoIosNotifications size={21} />,
@@ -80,7 +80,7 @@ const SideBar = ({ userData, userType }) => {
 
     return (
         <>
-            <div className='bg-gray-100 text-gray-900 h-screen px-4 fixed w-16 md:w-64 border-r dark:text-white dark:border-gray-600 dark:bg-gray-900'>
+            <div className='bg-white text-black h-screen px-4 fixed w-16 md:w-64 border-r'>
                 <div className='flex justify-between items-center p-4'>
                     <img
                         className='w-12 h-12 rounded-full'
@@ -105,7 +105,7 @@ const SideBar = ({ userData, userType }) => {
                 
                 <ul className='flex flex-col mt-5 text-xl'>
                     {getMenuItems().map((item, index) => (
-                        <li key={index} className="flex items-center py-3 px-2 space-x-4 hover:bg-gray-300 hover:rounded cursor-pointer dark:hover:bg-gray-600">
+                        <li key={index} className="flex items-center py-3 px-2 space-x-4 hover:bg-gray-200 hover:rounded cursor-pointer ">
                             <Link to={item.link} className='flex items-center w-full'>
                                 {item.icon}
                                 <span className='ml-4 block md:block'>{item.label}</span>
@@ -114,7 +114,7 @@ const SideBar = ({ userData, userType }) => {
                     ))}
                     
                     {/* Logout item */}
-                    <li className='flex items-center py-3 px-2 space-x-4 hover:bg-gray-300 hover:rounded cursor-pointer dark:hover:bg-gray-600'>
+                    <li className='flex items-center py-3 px-2 space-x-4 hover:bg-gray-200 hover:rounded cursor-pointer '>
                         <button onClick={logout} className='flex items-center w-full text-left'>
                             <FaSignOutAlt size={20} />
                             <span className='ml-4 block md:block'>Logout</span>

@@ -25,13 +25,14 @@ function Form({ route, method }) {
 
         const currentUser = await api.get('/api/get-user/');
         const user = currentUser.data;
+        console.log(`user is, `, user);
 
         if (user.data.is_patient) {
           localStorage.setItem('userRole', 'patient');
           return navigate("/");
 
-        } else if (user.data.is_medical_professional === true) {
-          localStorage.setItem('userRole', 'doctor');          
+        } else if (user.data.is_medical_professional) {
+          localStorage.setItem('userRole', 'doctor');
           return navigate("/dashboard");
 
         } else if (user.data.is_admin) {
@@ -39,7 +40,7 @@ function Form({ route, method }) {
 
         } else if (user.data.is_staff) {
           localStorage.setItem('userRole', 'staff');
-
+          
         }
         return navigate("/");
 
