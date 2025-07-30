@@ -2,9 +2,9 @@ import React from 'react'
 
 const Message = ({ message }) => {
     return (
-        <div className='container mx-auto'>
+        <section className='container mx-auto'>
             <p> {message} </p>
-        </div>
+        </section>
     )
 }
 

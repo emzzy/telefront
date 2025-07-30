@@ -4,7 +4,7 @@ import { fetchPatientData } from '../../api/fetchData';
 import Notifications from '../Notifications';
 
 
-const PatientDashboard = () => {
+const PatientDashboard = ({ userType }) => {
     const { data, isLoading, isError } = useQuery({
         queryKey: ['patientDashboardData'],
         queryFn: fetchPatientData,

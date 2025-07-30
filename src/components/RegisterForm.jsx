@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import api from "../api";
+import api from "../api/api";
 import { validateEmail } from "../utils";
 import { data, useNavigate } from "react-router-dom";
 import "../styles/RegisterForm.css";
@@ -278,7 +278,7 @@ function RegisterForm() {
             </select>
           </div>
           <div className="text-center">
-            <button type="submit" disabled={loading}>
+            <button class="RegisterButton" type="submit" disabled={loading}>
               {loading ? "Creating Account..." : "Register"}
             </button>
           </div>

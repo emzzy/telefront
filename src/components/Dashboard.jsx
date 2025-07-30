@@ -7,37 +7,48 @@ import { IoIosNotifications } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
 import { FaEye } from "react-icons/fa";
 import { useQuery } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
+import PatientAppointments from '../pages/patient/PatientAppointments';
 
 
-const Dashboard = ({ userType, userData, appointments, notifications = [] }) => {
+const Dashboard = ({ userType, userData, appointments, notifications, totalSpent }) => {
     const navigate = useNavigate();
 
     if (!userData) {
-        return <div className='p-6'>Loading dashboard....</div>;
+        return <div className='p-6'>Loading dashboard....</div>
     }
     const handleClick = (appointmentId) => {
-        navigate(`/appointment/${appointmentId}/`, {});
+        if (userType === 'doctor') {
+            navigate(`/appointment/${appointmentId}/`, {});
+        }
+        else if (userType === 'patient') {
+            navigate(`/patient/appointment/${appointmentId}/detail`);
+        }
     };
-    
     const totalAppointments = appointments.length || 0;
     const totalNotifications = notifications.length || 0;
-
+    
     return (
         <div className='flex'>
-            <SideBar doctor={userType === 'doctor' ? userData : null} patient={userType === 'patient' ? userData : null} />
-            <div className='grow ml-16 md:ml-64 h-full lg:h-screen bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-white'>
-                <DashboardNavbar doctor={userType === 'doctor' ? userData : null} patient={userType === 'patient' ? userData : null} />
+            <SideBar userData={userData} userType={userType} />
+            <div className='bg-white grow ml-16 md:ml-64 h-full lg:h-screen bg-white text-black'>
+                <DashboardNavbar userData={userData} userType={userType} />
                 
-                <div className='grow p-7'>
-                    <h2> Dashboard </h2>
+                <div className='grow p-7 bg-white'>
+                    {/* <h2> Dashboard </h2> */}
                     
-                    <div className='grid grid-cols-2 p-2 md:grid-cols-4 lg:grid-cols-4 gap-4 mb-6'>
-                        <Card icon={<FaCalendarAlt />} title='Appointments' value={totalAppointments} />
-                        <Card icon={<IoIosNotifications />} title='Notifications' value={totalNotifications} />
+                    <div className='flex grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-2 mb-6'>
+                        <div className="w-full">
+                            <Card icon={<FaCalendarAlt />} title="Appointments" value={totalAppointments} />
+                        </div>
+                        <div className="w-full">
+                            <Card icon={<IoIosNotifications />} title="Notifications" value={totalNotifications} />
+                        </div>
+                        <div className="w-full">
+                            <Card icon={<IoIosNotifications />} title="Total Spent" value={`£${totalSpent}`} />
+                        </div>
                     </div>
-
-                    <table className='w-full border-collapse border-t border-b border-gray-300 dark:hover:bg-gray-900 transition-colours hover:rounded'>
+                    {/* <table className='w-full border-collapse border-t border-b border-gray-300 dark:hover:bg-gray-900 transition-colours hover:rounded'>
                         <thead>
                             <tr className='bg-gray-200 dark:border-gray-600 dark:bg-gray-900 dark:text-white'>
                                 <th className='p-3 text-left'> Appointment ID </th>
@@ -54,10 +65,11 @@ const Dashboard = ({ userType, userData, appointments, notifications = [] }) => 
                                             key={index}
                                             className='border-t border-gray-300 hover:bg-gray-300 hover:rounded cursor-pointer dark:hover:bg-gray-600
                                             dark:hover:rounded'
-                                            onClick={() => handleClick(appointment.appointment_id)}
+                                            onClick={() => handleClick(appointment.appointment_id)
+                                            }
                                         >
                                             <td className='p-3'> {appointment.appointment_id} </td>
-                                            <td className='p-3'> {userType === 'doctor' ? appointment.patient?.full_name : `Dr. ${appointment.doctor}`} </td>
+                                            <td className='p-3'> {userType === 'doctor' ? appointment.patient?.full_name : `${appointment.doctor}`} </td>
                                             <td className='p-3'> {appointment.issues} </td>
                                             <td className='p-3'>
                                                 {new Date(appointment.appointment_date).toLocaleDateString()}
@@ -85,7 +97,13 @@ const Dashboard = ({ userType, userData, appointments, notifications = [] }) => 
                                 })
                             }
                         </tbody>
-                    </table>
+                    </table> */}
+                    <PatientAppointments
+                        userType={userType}
+                        userData={userData}
+                        appointments={appointments}
+                        handleClick={handleClick}
+                    />
                 </div>
             </div>
         </div>

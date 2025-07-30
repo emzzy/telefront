@@ -15,7 +15,7 @@ const Appointment = () => {
         queryKey: ['appointmentDetail', appointmentId],
         queryFn: () => getAppointments(appointmentId),
     });
-
+    
     const queryClient = useQueryClient();
 
     const handleMedicalReportSaved = () => {
@@ -27,7 +27,6 @@ const Appointment = () => {
         setShowLabReportModal(false);
     };
     
-
     const [buttonAction, setButtonAction] = useState(false);
     const [showMedicalReportModal, setShowMedicalReportModal] = useState(false);
     const [showLabReportModal, setShowLabReportModal] = useState(false);

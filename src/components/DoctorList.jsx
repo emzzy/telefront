@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import api from "../api";
+import api from "../api/api";
 // import { TfiLocationPin } from "react-icons/tfi";
 import "../styles/DoctorList.css";
 import { useNavigate } from "react-router-dom";
@@ -20,7 +20,6 @@ const DoctorList = () => {
       .then((res) => res.data)
       .then((data) => {
         setDoctors(data);
-        console.log(data);
       })
       .catch((err) => alert(err));
   };
@@ -47,7 +46,7 @@ const DoctorList = () => {
                 {doctors.title} {doctors.first_name} {doctors.last_name}
               </h3>
               <h4>
-                Location: {doctors.location}
+                Location: {doctors.medicalprofessional.user.location}
               </h4>
               <button className="doctor-button">Chat</button>
             </div>
