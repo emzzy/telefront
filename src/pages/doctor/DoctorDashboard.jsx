@@ -1,27 +1,17 @@
-import React from 'react'
-import { fetchDoctorData } from '../../api/fetchData';
-import { useQuery } from '@tanstack/react-query';
+import { useOutletContext } from 'react-router-dom';
 import Dashboard from '../../components/Dashboard';
 
-
 const DoctorDashboard = () => {
-    const { data, isError, isLoading } = useQuery({
-        queryKey: ['doctorDashboardData'],
-        queryFn: fetchDoctorData,
-    });
-
-    if (isLoading) return <div>Loading....</div>
-    if (isError) return <div>Error loading data</div>
-
+    const { userData, doctorData } = useOutletContext();
+    
     return (
-        <>
-            <Dashboard
-                userType='doctor'
-                userData={data.doctor}
-                appointments={data.appointments}
-                notifications={data.notifications}
-            />
-        </>
+        <Dashboard
+            userType="doctor"
+            userData={userData}
+            appointments={doctorData?.appointments || []}
+            notifications={doctorData?.notifications || []}
+            totalEarnings={doctorData?.total_earnings || 0}
+        />
     );
 };
 export default DoctorDashboard;
