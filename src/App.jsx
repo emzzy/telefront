@@ -28,6 +28,10 @@ import PatientAppointments from "./pages/patient/PatientAppointments";
 import PatientLayout from "./components/layout/PatientLayout";
 import DoctorLayout from "./components/layout/DoctorLayout";
 import RoomsList from "./pages/chat/RoomsList";
+import ChatRoom from "./pages/chat/ChatRoom";
+import ChatList from "./components/ChatList";
+import Conversation from "./components/Conversation";
+
 
 function AppRoutes() {
   const location = useLocation();
@@ -66,7 +70,9 @@ function AppRoutes() {
         <Route path="/checkout/:billingId" element={<Checkout />} />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/payment-success" element={<PaymentSuccess />} />
-        
+        <Route path="/chats" element={<ChatList />} />
+        <Route path="/chat/:conversationId" element={<Conversation />} />
+                
         {/* Doctor Routes - Wrapped in DoctorLayout */}
         <Route path="/" element={<DoctorLayout />}>
           <Route path="dashboard" element={<DoctorDashboard />} />
@@ -86,6 +92,7 @@ function AppRoutes() {
           <Route path="notifications" element={<PatientNotifications />} />
           <Route path="appointment/:appointmentId/detail" element={<PatientAppointmentDetail />} />
           <Route path="chat/" element={<RoomsList />} />
+          <Route path="chat/:slug" element={<ChatRoom />} />
           {/* <Route path="billing" element={<PatientBilling />} /> */}
         </Route>
 

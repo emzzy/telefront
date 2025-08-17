@@ -15,3 +15,7 @@ export const getRoomMessages = async (roomSlug) => {
     const res = await api.get(`/chat_rooms/rooms/${roomSlug}/messages/`);
     return res.data;
 };
+
+export const postMessage = async (roomSlug) =>  {
+    const res = await api.post(`/chat`);
+}
