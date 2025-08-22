@@ -72,7 +72,7 @@ function AppRoutes() {
         <Route path="/payment-success" element={<PaymentSuccess />} />
         <Route path="/chats" element={<ChatList />} />
         <Route path="/chat/:conversationId" element={<Conversation />} />
-                
+
         {/* Doctor Routes - Wrapped in DoctorLayout */}
         <Route path="/" element={<DoctorLayout />}>
           <Route path="dashboard" element={<DoctorDashboard />} />
