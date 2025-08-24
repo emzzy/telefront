@@ -70,8 +70,8 @@ function AppRoutes() {
         <Route path="/checkout/:billingId" element={<Checkout />} />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/payment-success" element={<PaymentSuccess />} />
-        <Route path="/chats" element={<ChatList />} />
         <Route path="/chat/:conversationId" element={<Conversation />} />
+        <Route path="*" element={<NotFound />} />
 
         {/* Doctor Routes - Wrapped in DoctorLayout */}
         <Route path="/" element={<DoctorLayout />}>
@@ -81,7 +81,7 @@ function AppRoutes() {
           <Route path="notifications" element={<Notifications />} />
           <Route path="appointment/:appointmentId" element={<Appointment />} />
           <Route path="edit-profile" element={<EditDoctorProfile />} />
-          <Route path="chat-room" element={<RoomsList />} />
+          <Route path="chats" element={<ChatList />} />
         </Route>
 
         {/* Patient Routes - Wrapped in PatientLayout */}
@@ -91,12 +91,10 @@ function AppRoutes() {
           <Route path="edit-profile" element={<EditPatientProfile />} />
           <Route path="notifications" element={<PatientNotifications />} />
           <Route path="appointment/:appointmentId/detail" element={<PatientAppointmentDetail />} />
-          <Route path="chat/" element={<RoomsList />} />
-          <Route path="chat/:slug" element={<ChatRoom />} />
-          {/* <Route path="billing" element={<PatientBilling />} /> */}
+          <Route path="chats" element={<ChatList />} />
+          {/* <Route path="chat/:slug" element={<ChatRoom />} />
+          <Route path="billing" element={<PatientBilling />} /> */}
         </Route>
-
-        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
