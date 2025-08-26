@@ -123,7 +123,7 @@ const ChatList = () => {
                 {errorMessage && (
                     <div className="error-message-banner">
                         <p>{errorMessage}</p>
-                        <button 
+                        <button
                             className="close-error"
                             onClick={() => setErrorMessage("")}
                         >
