@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import api from "../api/api";
 import "../styles/Conversation.css";
 import { ACCESS_TOKEN } from "../constants";
+import { IoSend } from "react-icons/io5";
 
 
 const Conversation = ({ conversationId, currentUserId, onBack }) => {
@@ -52,7 +53,6 @@ const Conversation = ({ conversationId, currentUserId, onBack }) => {
     useEffect(() => {
         if (!conversationId) return;
         const token = localStorage.getItem(ACCESS_TOKEN);
-        console.log('WS TOKEN!!!!!!: ', token);
 
         const websocket = new WebSocket(`ws://localhost:8000/ws/chat/${conversationId}/?token=${token}`);
 
@@ -91,7 +91,7 @@ const Conversation = ({ conversationId, currentUserId, onBack }) => {
                         setOnlineUsers((prev) => [...prev, ...data.online_users]);
                     } else if (data.status === "offline") {
                         setOnlineUsers((prev) =>
-                        prev.filter((user) => !data.online_users.some((u) => u.id === user.id))
+                            prev.filter((user) => !data.online_users.some((u) => u.id === user.id))
                         );
                     }
                 }
@@ -101,7 +101,12 @@ const Conversation = ({ conversationId, currentUserId, onBack }) => {
         };
 
         websocket.onerror = (error) => {
-            console.error("WebSocket Error:", error);
+            console.error("WebSocket error:", error);
+            console.error("WebSocket state:", readyState);
+            console.error("WebSocket URL:", websocket.url);
+        };
+        websocket.onclose = (event) => {
+            console.error('Websocket closed:', event.code, event.reason);
         };
 
         setSocket(websocket);
@@ -142,8 +147,6 @@ const Conversation = ({ conversationId, currentUserId, onBack }) => {
 
         const receiverId = chatPartner.id;
 
-        console.log(`Sending typing event for receiverId: ${receiverId}`);
-
         socket.send(
             JSON.stringify({
                 type: "typing",
@@ -170,7 +173,7 @@ const Conversation = ({ conversationId, currentUserId, onBack }) => {
 
     const handleDeleteMessage = async (messageId) => {
         try {
-            const response = await api.delete(`/conversations/${conversationId}/messages/${messageId}/`);
+            const response = await api.delete(`chat/conversations/${conversationId}/messages/${messageId}/`);
             if (response.status === 204) {
                 setMessages((prevMessages) => prevMessages.filter((msg) => msg.id !== messageId));
             }
@@ -180,83 +183,11 @@ const Conversation = ({ conversationId, currentUserId, onBack }) => {
     };
     
 
-    return (
-        // <div className="conversation-container">
-        //     <div className="conversation-header">
-        //         <button className="back-button" onClick={onBack}>Back</button>
-        //         <h3>{chatPartner ? `Chat with ${chatPartner.username}` : "Chat"}</h3>
-        //         <div className="online-status">
-        //             {onlineUsers.length > 0 ? (
-        //                 onlineUsers.map((user) => (
-        //                     <span key={user.id} className="online-user">
-        //                         {user.username} (online)
-        //                     </span>
-        //                 ))
-        //             ) : (
-        //                 <span>No users online</span>
-        //             )}
-        //         </div>
-        //     </div>
-
-        //     <div className="messages-container">
-        //         {loading ? (
-        //         <p>Loading messages...</p>
-        //         ) : (
-        //         messages.map((message, index) => {
-        //             const isSentByCurrentUser = message.sender?.id === currentUserId;
-
-        //             return (
-        //             <div key={index} className={`message-wrapper ${isSentByCurrentUser ? "sent" : "received"}`}>
-        //                 {!isSentByCurrentUser && (
-        //                 <span className="message-username">
-        //                     {message.sender?.username || "Unknown"}
-        //                 </span>
-        //                 )}
-        //                 <div className="message-bubble">
-        //                     {message.content}
-        //                     {isSentByCurrentUser && (
-        //                         <button
-        //                             className="delete-button"
-        //                             onClick={() => handleDeleteMessage(message.id)}
-        //                         >
-        //                             Delete
-        //                         </button>
-        //                     )}
-        //                 </div>
-        //                 <div className="message-timestamp">{formatTimestamp(message.timestamp)}</div>
-        //             </div>
-        //             );
-        //         })
-        //         )}
-        //     </div>
-
-        //     {typingUser && (
-        //         <div className="typing-indicator">
-        //             {typingUser.username} is typing...
-        //         </div>
-        //     )}
-
-        //     <div className="input-container">
-        //         <input
-        //             type="text"
-        //             value={newMessage}
-        //             onChange={(e) => {
-        //                 setNewMessage(e.target.value) 
-        //                 debouncedHandleTyping();
-        //             }}
-        //             onKeyDown={handleTyping}
-        //             placeholder="Type a message..."
-        //             className="message-input"
-        //         />
-        //         <button className="send-button" onClick={handleSendMessage}>
-        //             Send
-        //         </button>
-        //     </div>
-        // </div>
+    return (        
         <div className="conversation-container">
             <div className="conversation-header">
                 <button className="back-button" onClick={onBack}>Back</button>
-                <h3>{chatPartner ? `Chat with ${chatPartner.username}` : "Chat"}</h3>
+                <h3>{chatPartner ? `Chat with ${chatPartner.first_name}` : "Chat"}</h3>
                 <div className="online-status">
                 {onlineUsers && onlineUsers.length > 0 ? (
                     onlineUsers.map((user) => (
@@ -284,7 +215,7 @@ const Conversation = ({ conversationId, currentUserId, onBack }) => {
                     >
                         {!isSentByCurrentUser && (
                         <span className="message-username">
-                            {message.sender?.username || "Unknown"}
+                            {message.sender?.first_name || "Unknown"}
                         </span>
                         )}
                         <div className="message-bubble">
@@ -311,7 +242,7 @@ const Conversation = ({ conversationId, currentUserId, onBack }) => {
 
             {typingUser && (
                 <div className="typing-indicator">
-                    {typingUser.username} is typing...
+                    {typingUser.first_name} is typing...
                 </div>
             )}
 
@@ -328,8 +259,9 @@ const Conversation = ({ conversationId, currentUserId, onBack }) => {
                     className="message-input"
                 />
                 <button className="send-button" onClick={handleSendMessage}>
-                    Send
+                    <IoSend size={17} />
                 </button>
+                
             </div>
         </div>
     );

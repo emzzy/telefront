@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaBars, FaCog, FaHome, FaSignOutAlt, FaUserAlt, FaEdit, FaCalendarAlt } from 'react-icons/fa';
 import { IoIosNotifications } from "react-icons/io";
-import { MdOutlinePayment } from "react-icons/md";
+import { MdMessage, MdOutlinePayment } from "react-icons/md";
 import { Link } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout';
 
@@ -42,7 +42,7 @@ const SideBar = ({ userData, userType }) => {
                 icon: <FaEdit size={20} />,
                 label: 'Edit Profile',
                 link: userType === 'doctor' ? '/edit-profile' : '/patient/edit-profile'
-            }
+            },            
         ];
 
         const doctorSpecificItems = [
@@ -51,6 +51,11 @@ const SideBar = ({ userData, userType }) => {
                 label: 'Payments',
                 link: '/payments'
             },
+            {
+                icon: <MdMessage size={20} />,
+                label: 'Messages',
+                link: '/chats'
+            }
         ];
 
         const patientSpecificItems = [
@@ -59,6 +64,11 @@ const SideBar = ({ userData, userType }) => {
                 label: 'Billing',
                 link: '/billing'
             },
+            {
+                icon: <MdMessage size={20} />,
+                label: 'Message a Doctor',
+                link: '/patient/chats'
+            }
         ];
 
         // Combine common items with role-specific items
