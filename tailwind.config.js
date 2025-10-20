@@ -5,12 +5,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        'redx': "#FF4C4C",
-        "brand-blue": {
-          default: "#259cd3",
-          100: "#259cd3",
-          200: "#4db3e0",
-          300: "#1d7ba8",
+        "tele-blue": {
+          DEFAULT: "#259cd3",
+          light: "#4db3e0",
+          dark: "#1d7ba8",
         },
       },
       fontFamily: {
