@@ -4,6 +4,13 @@ export default {
   // darkMode: 'class',
   theme: {
     extend: {
+      colors: {
+        "tele-blue": {
+          DEFAULT: "#259cd3",
+          light: "#4db3e0",
+          dark: "#1d7ba8",
+        },
+      },
       fontFamily: {
         sans: ["Poppins", "sans-serif"],
       },

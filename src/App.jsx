@@ -10,7 +10,7 @@ import AboutUs from "./pages/AboutUs";
 import Navbar from "./components/Navbar";
 import ServiceDetail from "./pages/ServiceDetail";
 import BookAppointment from "./pages/BookAppointment";
-import "./styles/global.css";
+import "./index.css";
 import Checkout from "./pages/Checkout";
 import { AppointmentFormProvider } from "./context/AppointmentFormContext";
 import PaymentSuccess from "./pages/PaymentSuccess";
@@ -32,41 +32,61 @@ import ChatRoom from "./pages/chat/ChatRoom";
 import ChatList from "./components/ChatList";
 import Conversation from "./components/Conversation";
 
-
 function AppRoutes() {
   const location = useLocation();
   const hideNavbarRoutes = [
-    "/login", 
-    "/register", 
-    "/dashboard", 
-    "/edit-profile", 
-    "/payments", 
+    "/login",
+    "/register",
+    "/dashboard",
+    "/edit-profile",
+    "/payments",
     "/notifications",
     "/appointments",
-    "/appointment/"
+    "/appointment/",
   ];
-  
+
   // Check if current path starts with patient or doctor routes
   const isPatientRoute = location.pathname.startsWith("/patient");
-  const isDoctorRoute = location.pathname.startsWith("/doctor") || 
-  ["/dashboard", "/edit-profile", "/payments", "/notifications", "/appointments"].includes(location.pathname);
-  
-  const shouldHideNavbar = hideNavbarRoutes.some(route =>
-    location.pathname.startsWith(route) || location.pathname === route
-  ) || isPatientRoute || isDoctorRoute;
+  const isDoctorRoute =
+    location.pathname.startsWith("/doctor") ||
+    [
+      "/dashboard",
+      "/edit-profile",
+      "/payments",
+      "/notifications",
+      "/appointments",
+    ].includes(location.pathname);
+
+  const shouldHideNavbar =
+    hideNavbarRoutes.some(
+      (route) =>
+        location.pathname.startsWith(route) || location.pathname === route
+    ) ||
+    isPatientRoute ||
+    isDoctorRoute;
 
   return (
     <>
       {!shouldHideNavbar && <Navbar />}
       <Routes>
         {/* Public Routes */}
-        <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/select-role" element={<SelectRole />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/services" element={<Services />} />
         <Route path="/service/:serviceId" element={<ServiceDetail />} />
-        <Route path="/book-appointment/:serviceId/:doctorId" element={<BookAppointment />} />
+        <Route
+          path="/book-appointment/:serviceId/:doctorId"
+          element={<BookAppointment />}
+        />
         <Route path="/checkout/:billingId" element={<Checkout />} />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/payment-success" element={<PaymentSuccess />} />
@@ -90,7 +110,10 @@ function AppRoutes() {
           <Route path="appointments" element={<PatientAppointments />} />
           <Route path="edit-profile" element={<EditPatientProfile />} />
           <Route path="notifications" element={<PatientNotifications />} />
-          <Route path="appointment/:appointmentId/detail" element={<PatientAppointmentDetail />} />
+          <Route
+            path="appointment/:appointmentId/detail"
+            element={<PatientAppointmentDetail />}
+          />
           <Route path="chats" element={<ChatList />} />
           {/* <Route path="chat/:slug" element={<ChatRoom />} />
           <Route path="billing" element={<PatientBilling />} /> */}
@@ -108,5 +131,5 @@ function App() {
       </BrowserRouter>
     </AppointmentFormProvider>
   );
-};
+}
 export default App;
