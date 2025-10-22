@@ -2,7 +2,7 @@ import { useState } from "react";
 import api from "../api/api";
 import { useNavigate, Link } from "react-router-dom";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
-import "../styles/Form.css";
+// import "../styles/Form.css";
 
 function Form({ route, method }) {
   const [email, setEmail] = useState("");
@@ -53,17 +53,17 @@ function Form({ route, method }) {
     <>
       <div className="max-w-xs lg:max-w-sm mx-auto">
         <form onSubmit={handleSubmit} className="flex flex-col w-full">
-          <label className="text-left font-semibold">Email</label>
+          <label className="text-left font-semibold mb-1">Email</label>
           <input
-            className="mb-6 p-5 focus:border-tele-blue-dark focus:outline-none"
+            className="mb-6 p-3 lg:p-4 border-2 rounded-lg focus:border-tele-blue-dark focus:outline-none"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
           />
-          <label className="text-left font-semibold">Password</label>
+          <label className="text-left font-semibold mb-1">Password</label>
           <input
-            className="form-input p-5 focus:border-tele-blue-dark focus:outline-none"
+            className="p-3 lg:p-4 border-2 rounded-lg focus:border-tele-blue-dark focus:outline-none"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -85,7 +85,7 @@ function Form({ route, method }) {
             </Link>
           </div>
           <button
-            className="rounded-lg bg-tele-blue-light hover:bg-tele-blue-dark p-2 text-white font-semibold"
+            className="p-3 lg:p-4 rounded-lg bg-tele-blue-light hover:bg-tele-blue-dark text-white font-semibold"
             type="submit"
           >
             {name}

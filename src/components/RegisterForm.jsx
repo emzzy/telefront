@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import api from "../api/api";
 import { validateEmail } from "../utils";
 import { data, useNavigate } from "react-router-dom";
-import "../styles/RegisterForm.css";
+// import "../styles/RegisterForm.css";
 
 const PasswordErrorMessage = () => {
   return (
@@ -27,6 +27,7 @@ function RegisterForm() {
     value: "",
     isTouched: false,
   });
+  const [accountType, setAccountType] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -35,6 +36,7 @@ function RegisterForm() {
     console.log(`This user is a: ${userRole}`);
     if (userRole) {
       setFormData((prev) => ({ ...prev, role: userRole }));
+      setAccountType(userRole === "patient" ? "Patient" : "Doctor");
     }
   }, []);
 
@@ -124,167 +126,175 @@ function RegisterForm() {
     }
   };
   return (
-    <div className="RegisterForm">
-      <form onSubmit={handleSubmit}>
-        <fieldset>
-          <h1>Register</h1>
-          <input type="hidden" name="role" value="" />
-          <div className="Field">
-            <label>
-              First name <sup>*</sup>
-            </label>
-            <input
-              id="firstName"
-              name="firstName"
-              type="text"
-              value={formData.firstName}
-              onChange={handleChange}
-              placeholder="First name"
-            />
-          </div>
-          <div className="Field">
-            <label>
-              Last Name <sup>*</sup>
-            </label>
-            <input
-              id="lastName"
-              name="lastName"
-              type="text"
-              value={formData.lastName}
-              onChange={handleChange}
-              placeholder="Last Name"
-            />
-          </div>
-          <div className="Field">
-            <label>
-              Email <sup>*</sup>
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="text"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="Email address"
-            />
-          </div>
-          <div className="Field">
-            <label>
-              Phone <sup>*</sup>
-            </label>
-            <input
-              id="phone"
-              name="phone"
-              type="number"
-              value={formData.phone}
-              onChange={handleChange}
-              placeholder="+123456789"
-            />
-          </div>
-          <div className="Field">
-            <label>
-              Password <sup>*</sup>
-            </label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              value={formData.password}
-              onChange={(e) => {
-                setPasswordState({ value: e.target.value, isTouched: true });
-                handleChange({
-                  target: { name: "password", value: e.target.value },
-                });
-              }}
-              placeholder="Password"
-            />
-            {formData.password.isTouched && password.value.length < 8 ? (
-              <PasswordErrorMessage />
-            ) : null}
-          </div>
-          <div className="Field">
-            <label>
-              Confirm Password <sup>*</sup>
-            </label>
-            <input
-              id="confirmPassword"
-              name="confirmPassword"
-              type="password"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              placeholder="Confirm Password"
-            />
-          </div>
-          <div className="Field">
-            <label>
-              Gender <sup>*</sup>
-            </label>
-            <select
-              id="gender"
-              name="gender"
-              type="text"
-              value={formData.gender}
-              onChange={handleChange}
-              placeholder="Gender"
-            >
-              <option value="Select Gender"></option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-          <div className="Field">
-            <label>
-              Location <sup>*</sup>
-            </label>
-            <input
-              id="location"
-              name="location"
-              type="text"
-              value={formData.location}
-              onChange={handleChange}
-              placeholder="Location"
-            />
-          </div>
-          <div className="Field">
-            <label>
-              Date of Birth <sup>*</sup>
-            </label>
-            <input
-              id="dateOfBirth"
-              name="dateOfBirth"
-              type="date"
-              value={formData.dateOfBirth}
-              onChange={handleChange}
-              placeholder="Date of birth"
-            />
-          </div>
-          <div className="Field">
-            <label>
-              Role <sup>*</sup>
-            </label>
-            <select
-              id="role"
-              name="role"
-              type="text"
-              value={formData.role}
-              onChange={handleChange}
-              placeholder="User role"
-              disabled
-            >
-              <option value="">Select Role</option>
-              <option value="patient">Patient</option>
-              <option value="medical_professional">Doctor</option>
-            </select>
-          </div>
-          <div className="text-center">
-            <button class="RegisterButton" type="submit" disabled={loading}>
-              {loading ? "Creating Account..." : "Register"}
-            </button>
-          </div>
-        </fieldset>
-      </form>
-    </div>
+    <>
+      <h1 className="text-center text-3xl font-semibold text-tele-blue mb-4">
+        Create Account
+      </h1>
+      <div className="RegisterForm">
+        <form onSubmit={handleSubmit}>
+          <fieldset>
+            <h3 className="text-center text-xl font-semibold mb-2">
+              Register as a {accountType}
+            </h3>
+            <input type="hidden" name="role" value="" />
+            <div className="Field">
+              <label>
+                First name <sup>*</sup>
+              </label>
+              <input
+                id="firstName"
+                name="firstName"
+                type="text"
+                value={formData.firstName}
+                onChange={handleChange}
+                placeholder="First name"
+                className="border-2 p-2 rounded focus:border-tele-blue-dark focus:outline-none"
+              />
+            </div>
+            <div className="Field">
+              <label>
+                Last Name <sup>*</sup>
+              </label>
+              <input
+                id="lastName"
+                name="lastName"
+                type="text"
+                value={formData.lastName}
+                onChange={handleChange}
+                placeholder="Last Name"
+              />
+            </div>
+            <div className="Field">
+              <label>
+                Email <sup>*</sup>
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="text"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Email address"
+              />
+            </div>
+            <div className="Field">
+              <label>
+                Phone <sup>*</sup>
+              </label>
+              <input
+                id="phone"
+                name="phone"
+                type="number"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder="+123456789"
+              />
+            </div>
+            <div className="Field">
+              <label>
+                Password <sup>*</sup>
+              </label>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                value={formData.password}
+                onChange={(e) => {
+                  setPasswordState({ value: e.target.value, isTouched: true });
+                  handleChange({
+                    target: { name: "password", value: e.target.value },
+                  });
+                }}
+                placeholder="Password"
+              />
+              {formData.password.isTouched && password.value.length < 8 ? (
+                <PasswordErrorMessage />
+              ) : null}
+            </div>
+            <div className="Field">
+              <label>
+                Confirm Password <sup>*</sup>
+              </label>
+              <input
+                id="confirmPassword"
+                name="confirmPassword"
+                type="password"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                placeholder="Confirm Password"
+              />
+            </div>
+            <div className="Field">
+              <label>
+                Gender <sup>*</sup>
+              </label>
+              <select
+                id="gender"
+                name="gender"
+                type="text"
+                value={formData.gender}
+                onChange={handleChange}
+                placeholder="Gender"
+              >
+                <option value="Select Gender"></option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div className="Field">
+              <label>
+                Location <sup>*</sup>
+              </label>
+              <input
+                id="location"
+                name="location"
+                type="text"
+                value={formData.location}
+                onChange={handleChange}
+                placeholder="Location"
+              />
+            </div>
+            <div className="Field">
+              <label>
+                Date of Birth <sup>*</sup>
+              </label>
+              <input
+                id="dateOfBirth"
+                name="dateOfBirth"
+                type="date"
+                value={formData.dateOfBirth}
+                onChange={handleChange}
+                placeholder="Date of birth"
+              />
+            </div>
+            <div className="Field">
+              <label>
+                Role <sup>*</sup>
+              </label>
+              <select
+                id="role"
+                name="role"
+                type="text"
+                value={formData.role}
+                onChange={handleChange}
+                placeholder="User role"
+                disabled
+              >
+                <option value="">Select Role</option>
+                <option value="patient">Patient</option>
+                <option value="medical_professional">Doctor</option>
+              </select>
+            </div>
+            <div className="text-center">
+              <button class="RegisterButton" type="submit" disabled={loading}>
+                {loading ? "Creating Account..." : "Register"}
+              </button>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </>
   );
 }
 

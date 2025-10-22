@@ -1,7 +1,10 @@
-import RegisterForm from "../components/RegisterForm";
+// import RegisterForm from "../components/RegisterForm";
+import RegisterAHealthcareProvider from "../components/RegisterAHealthcareProvider";
 
 function Register() {
-    return <RegisterForm route="/api/user/signup/" method="register" />
+    return <RegisterAHealthcareProvider />;
+    
+//   return <RegisterForm route="/api/user/signup/" method="register" />;
 }
 
-export default Register
+export default Register;
