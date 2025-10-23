@@ -7,7 +7,7 @@ import appleIcon from '../assets/images/apple.svg';
 function Login() {
   return (
     <>
-      <div className="flex flex-col justify-center mn-h-screen">
+      <div className="flex flex-col justify-center min-h-screen">
         <div>
           <h1 className="text-3xl lg:text-4xl font-semibold text-tele-blue mb-6 text-center">
             Log in to your account

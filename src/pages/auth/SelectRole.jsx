@@ -28,10 +28,10 @@ function SelectRole() {
 
         <button
           type="button"
-          onClick={() => handleSelectRole("medical_professional")}
+          onClick={() => handleSelectRole("healthcare_provider")}
           className="w-full px-6 py-3 border-2 border-gray-300 font-semibold rounded-lg hover:border-tele-blue-dark hover:text-white  hover:bg-tele-blue-dark transition duration-300"
         >
-          Sign up as Medical Professional
+          Sign up as Healthcare Provider
         </button>
       </div>
     </div>

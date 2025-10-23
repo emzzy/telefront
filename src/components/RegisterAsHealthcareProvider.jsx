@@ -1,18 +1,12 @@
 export default function RegisterAHealthcareProvider() {
   return (
     <>
-      <h1 className="text-center text-3xl font-semibold text-tele-blue mb-4">
-        Create Account
-      </h1>
-      <h3 className="text-center text-xl font-semibold mb-2">
-        Register as a Healthcare Provider
-      </h3>
-      <div className="mt-4 mb-4">
+      <div className="mb-4">
         <form onSubmit="" className="">
           <fieldset>
-            <div className="flex justify-center items-end gap-10">
-              <div className="flex flex-col gap-6">
-                <div className="flex flex-col gap-1 w-full">
+            <div className="flex justify-center items-end gap-10 w-full">
+              <div className="flex flex-col gap-6 w-full max-w-xs lg:max-w-sm">
+                <div className="flex flex-col gap-1 max-w-32">
                   <label htmlFor="title">
                     Title <sup>*</sup>
                   </label>
@@ -30,6 +24,25 @@ export default function RegisterAHealthcareProvider() {
                     <option value="Mrs">Mrs</option>
                     <option value="Ms">Ms</option>
                     <option value="Prof">Prof</option>
+                  </select>
+                </div>
+                <div className="flex flex-col gap-1 max-w-40">
+                  <label htmlFor="gender">
+                    Gender <sup>*</sup>
+                  </label>
+                  <select
+                    id="gender"
+                    name="gender"
+                    type="text"
+                    // value={formData.gender}
+                    // onChange={handleChange}
+                    placeholder="Gender"
+                    className="border-2 p-3 lg:p-4 rounded-lg rounded focus:border-tele-blue-dark focus:outline-none"
+                  >
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
                   </select>
                 </div>
                 <input type="hidden" name="role" value="" />
@@ -111,35 +124,10 @@ export default function RegisterAHealthcareProvider() {
                     className="border-2 p-3 lg:p-4 rounded-lg rounded focus:border-tele-blue-dark focus:outline-none"
                   />
                 </div>
-                <div className="flex flex-col gap-1">
-                  <label htmlFor="gender">
-                    Gender <sup>*</sup>
-                  </label>
-                  <select
-                    id="gender"
-                    name="gender"
-                    type="text"
-                    // value={formData.gender}
-                    // onChange={handleChange}
-                    placeholder="Gender"
-                    className="border-2 p-3 lg:p-4 rounded-lg rounded focus:border-tele-blue-dark focus:outline-none"
-                  >
-                    <option value="">Select Gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-
-                <div className="text-center">
-                  <button class="RegisterButton" type="submit" disabled="">
-                    {/* {loading ? "Creating Account..." : "Register"} */}
-                  </button>
-                </div>
               </div>
 
-              <div className="flex flex-col gap-6">
-                <div className="flex flex-col gap-1">
+              <div className="flex flex-col gap-6 w-full max-w-xs lg:max-w-sm">
+                <div className="flex flex-col gap-1 max-w-52">
                   <label htmlFor="profession">
                     Profession <sup>*</sup>
                   </label>
@@ -196,9 +184,9 @@ export default function RegisterAHealthcareProvider() {
                   <input
                     id="professionalCertification"
                     name="professionalCertification "
-                    type=""
+                    type="file"
                     // value={formData.professionalCertification}
-                    placeholder="Professional certification"
+                    placeholder="Drop your file here to upload"
                     className="border-2 p-3 lg:p-4 rounded-lg rounded focus:border-tele-blue-dark focus:outline-none"
                   />
                 </div>
@@ -230,35 +218,15 @@ export default function RegisterAHealthcareProvider() {
                     className="border-2 p-3 lg:p-4 rounded-lg rounded focus:border-tele-blue-dark focus:outline-none"
                   />
                 </div>
-                <div className="text-center">
-                  <button class="RegisterButton" type="submit" disabled="">
-                    {/* {loading ? "Creating Account..." : "Register"} */}
-                  </button>
-                </div>
               </div>
             </div>
           </fieldset>
-          <div className="flex justify-center">
+          <div className="flex justify-center mt-6">
             <button className="w-1/3 lg:w-1/5 py-3 lg:py-4 mb-3 rounded-lg bg-tele-blue-light hover:bg-tele-blue-dark text-white">
               <span>Submit</span>
             </button>
           </div>
         </form>
-        <div className="text-center mt-4">
-          <p>
-            Already have an account?{" "}
-            <a href="/login" className="text-tele-blue">
-              Login
-            </a>
-          </p>
-        </div>
-        <div>
-          <p className="text-center text-gray-700 mt-3">
-            By joining, you agree to our{" "}
-            <span className="font-semibold">Terms & Conditions</span> and{" "}
-            <span className="font-semibold">Privacy Policy</span>
-          </p>
-        </div>
       </div>
     </>
   );
