@@ -1,20 +1,19 @@
 import Form from "../components/Form";
-import googleIcon from '../assets/images/google.svg';
-import appleIcon from '../assets/images/apple.svg';
-
-
+import googleIcon from "../assets/images/google.svg";
+import appleIcon from "../assets/images/apple.svg";
+import videoConsult from "../assets/images/videoConsult.png";
 
 function Login() {
   return (
     <>
-      <div className="flex flex-col justify-center min-h-screen">
+      <div className="flex justify-center lg:justify-end items-center min-h-screen lg:flex lg:gap-x-24 ">
         <div>
           <h1 className="text-3xl lg:text-4xl font-semibold text-tele-blue mb-6 text-center">
             Log in to your account
           </h1>
-          <h4 className="text-gray-600 font-semibold text-xl text-center mb-4">
+          {/* <h4 className="text-gray-600 font-semibold text-xl text-center mb-4">
             Select method to log in
-          </h4>
+          </h4> */}
           <Form route="/api/token/" method="login" />
           <div className="flex justify-center text-sm mt-12 mb-6 font-semibold">
             <p className="flex items-center px-4">Don't have an account? </p>
@@ -38,6 +37,11 @@ function Login() {
             </button>
           </div>
         </div>
+        <img
+          src={videoConsult}
+          alt="A doctor having a video consultation with a patient"
+          className="hidden lg:block h-screen rounded-lg"
+        />
       </div>
     </>
   );
