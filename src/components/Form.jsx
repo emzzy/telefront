@@ -51,7 +51,7 @@ function Form({ route, method }) {
 
   return (
     <>
-      <div className="max-w-xs lg:max-w-sm p-2">
+      <div className="max-w-xs lg:max-w-sm p-2 mx-auto">
         <form onSubmit={handleSubmit} className="flex flex-col w-full">
           <label className="text-left font-semibold mb-1">Email</label>
           <input

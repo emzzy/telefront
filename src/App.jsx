@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import HomePage from "./pages/HomePage";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
@@ -67,7 +68,9 @@ function AppRoutes() {
 
   return (
     <>
-      {!shouldHideNavbar && <Navbar />}
+      {/* {!shouldHideNavbar && <Navbar />} */}
+      {!shouldHideNavbar}
+
       <Routes>
         {/* Public Routes */}
         <Route
@@ -78,6 +81,7 @@ function AppRoutes() {
             </ProtectedRoute>
           }
         />
+        <Route path="/homepage" element={<HomePage />} />
         <Route path="/select-role" element={<SelectRole />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

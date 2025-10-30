@@ -1,12 +1,12 @@
 import Form from "../components/Form";
 import googleIcon from "../assets/images/google.svg";
 import appleIcon from "../assets/images/apple.svg";
-import videoConsult from "../assets/images/videoConsult.png";
+import videoConsult from "../assets/images/videoConsultLogin.png";
 
 function Login() {
   return (
     <>
-      <div className="flex justify-center lg:justify-end items-center min-h-screen lg:flex lg:gap-x-24 ">
+      <div className="flex justify-center lg:justify-end items-center min-h-screen lg:gap-x-40 ">
         <div>
           <h1 className="text-3xl lg:text-4xl font-semibold text-tele-blue mb-6 text-center">
             Log in to your account
@@ -40,7 +40,7 @@ function Login() {
         <img
           src={videoConsult}
           alt="A doctor having a video consultation with a patient"
-          className="hidden lg:block h-screen rounded-lg"
+          className="hidden lg:block w-1/2 h-screen rounded-xl object-cover mx-1 mb-1"
         />
       </div>
     </>
