@@ -4,7 +4,7 @@ export default function RegisterAsPatient() {
       <div className="mb-4">
         <form onSubmit="" className="">
           <fieldset>
-            <div className="flex justify-center gap-10 w-full">
+            <div className="flex flex-col items-center lg:flex-row justify-center gap-10 w-full">
               <div className="flex flex-col gap-6 w-full max-w-xs lg:max-w-sm">
                 <div className="flex flex-col gap-1 max-w-40">
                   <label htmlFor="gender">
