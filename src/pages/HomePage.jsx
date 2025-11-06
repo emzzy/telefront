@@ -33,7 +33,7 @@ export default function Home() {
               alt="A nurse holding a pad"
               className="relative z-10 lg:w-full"
             />
-            <div className="hidden lg:block">
+            <div className="hidden md:block lg:block">
               <div className="absolute -top-5 -left-6 z-1 rounded-[100%] h-80 w-80 bg-[#9eacc4]"></div>
               <div className="absolute top-60 left-60 z-10 rounded-[100%] h-20 w-20 bg-[#6f97d2]"></div>
               <div className="absolute -top-4 -left-0 z-10 rounded-[100%] h-6 w-6 bg-[#6f97d4]"></div>
@@ -70,12 +70,12 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="services-section bg-[#eff8fa] lg:py-10">
+      <section className="services-section bg-[#eff8fa] py-10">
         <h1 className="text-center text-3xl text-tele-blue font-bold py-8 lg:text-5xl lg:py-10">
           Our Services
         </h1>
-        <div className="services-container w-2/3 mx-auto space-y-10 lg:py-8 lg:space-y-0 lg:w-full lg:flex flex-wrap justify-center items-center lg:gap-12 lg:px-0">
-          <div className="flex flex-col items-center space-y-3 w-full lg:w-1/4 bg-white rounded-lg px-4 py-8 lg:py-14 h-full">
+        <div className="services-container w-1/2 mx-auto md:w-full lg:w-full flex flex-col md:flex-row lg:flex-row md:flex-wrap lg:flex-wrap justify-center items-center gap-10 lg:py-8 lg:space-y-0 lg:gap-12 lg:px-0">
+          <div className="search-card md:w-1/3 lg:w-1/4 flex flex-col items-center space-y-2 w-full bg-white rounded-lg px-3 py-4 lg:py-14">
             <div className="flex justify-center items-center bg-tele-blue w-10 h-10 p-4 rounded-[100%] text-white text-xl">
               <i class="fas fa-user"></i>
             </div>
@@ -89,7 +89,7 @@ export default function Home() {
               </p>
             </div>
           </div>
-          <div className="lg:w-1/4 flex flex-col items-center space-y-2 w-full bg-white rounded-lg px-4 py-8 lg:py-14 h-full">
+          <div className="video-card card md:w-1/3 lg:w-1/4 flex flex-col items-center space-y-2 w-full bg-white rounded-lg px-3 py-4 lg:py-14">
             <div className="flex justify-center items-center bg-tele-blue w-10 h-10 p-4 rounded-[100%] text-white text-xl">
               <i class="fas fa-video"></i>{" "}
             </div>
@@ -104,7 +104,7 @@ export default function Home() {
               </p>
             </div>
           </div>
-          <div className="lg:w-1/4 flex flex-col items-center space-y-2 w-full bg-white rounded-lg px-4 py-8 lg:py-14">
+          <div className="appointment-card md:w-1/3 lg:w-1/4 flex flex-col items-center space-y-2 w-full bg-white rounded-lg px-3 py-4 lg:py-14">
             <div className="flex justify-center items-center bg-tele-blue w-10 h-10 p-4 rounded-[100%] text-white text-xl">
               <i class="fas fa-calendar-plus"></i>{" "}
             </div>
@@ -118,7 +118,7 @@ export default function Home() {
               </p>
             </div>
           </div>
-          <div className="lg:w-1/4 flex flex-col items-center space-y-2 w-full bg-white rounded-lg px-4 py-8 lg:py-14">
+          <div className="emergency-card md:w-1/3 lg:w-1/4 flex flex-col items-center space-y-2 w-full bg-white rounded-lg px-3 py-4 lg:py-14">
             <div className="flex justify-center items-center bg-tele-blue w-10 h-10 p-4 rounded-[100%] text-white text-xl">
               <i class="fas fa-ambulance"></i>{" "}
             </div>
@@ -132,7 +132,7 @@ export default function Home() {
               </p>
             </div>
           </div>
-          <div className="lg:w-1/4 flex flex-col items-center space-y-2 w-full bg-white rounded-lg px-4 py-8 lg:py-14">
+          <div className="first-aid-card md:w-1/3 lg:w-1/4 flex flex-col items-center space-y-2 w-full bg-white rounded-lg px-3 py-4 lg:py-14">
             <div className="flex justify-center items-center bg-tele-blue w-10 h-10 p-4 rounded-[100%] text-white text-xl">
               <i class="fas fa-medkit"></i>{" "}
             </div>
@@ -151,10 +151,14 @@ export default function Home() {
 
       <section className="doctors-cards-section bg-[#c6d7da]">
         <div className="py-10">
-          <div className="lg:w-1/2 flex justify-end lg:justify-between items-center gap-x-10 lg:gap- ml-10 lg:ml-96 mr-4 mb-10">
-            <h1 className="text-center text-3xl lg:text-5xl font-bold">Our Doctors</h1>
+          <div className="md:w-2/3 md:mx-auto lg:w-1/2 flex justify-end lg:justify-between items-center gap-x-10 md:gap-x-24 ml-10 lg:ml-96 mr-4 mb-10">
+            <h1 className="text-center text-3xl lg:text-5xl font-bold">
+              Our Doctors
+            </h1>
             <a href="">
-              <p className="text-tele-blue text-sm lg:text-lg font-bold">See more</p>
+              <p className="text-tele-blue text-sm lg:text-lg font-bold">
+                See more
+              </p>
             </a>
           </div>
 
@@ -169,8 +173,8 @@ export default function Home() {
               See more
             </a>
           </div> */}
-          <div className="doc-cards-container flex flex-col lg:flex-row lg:gap-x-8 items-center gap-y-6 justify-center items-center">
-            <div className="bg-white w-2/4 lg:w-1/6 space-y-2 rounded-xl">
+          <div className="doc-cards-container flex flex-col justify-center items-center gap-y-6 md:flex-row lg:flex-row md:gap-x-8 lg:gap-x-8">
+            <div className="bg-white w-2/4 md:w-1/4 lg:w-1/6 space-y-2 rounded-xl">
               <div className="mx-auto w-48 h-36 overflow-hidden rounded-xl">
                 <img
                   src={nurseHeroSec}
@@ -195,7 +199,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="bg-white w-2/4 lg:w-1/6 space-y-2 rounded-xl">
+            <div className="bg-white w-2/4 md:w-1/4 lg:w-1/6 space-y-2 rounded-xl">
               <div className="mx-auto w-48 h-36 overflow-hidden rounded-xl">
                 <img
                   src={nurseHeroSec}
@@ -220,7 +224,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="bg-white w-2/4 lg:w-1/6 space-y-2 rounded-xl">
+            <div className="bg-white w-2/4 md:w-1/4 lg:w-1/6 space-y-2 rounded-xl">
               <div className="mx-auto w-48 h-36 overflow-hidden rounded-xl">
                 <img
                   src={nurseHeroSec}
@@ -253,7 +257,7 @@ export default function Home() {
           Book Appointment
         </h1>
         <div className="appointment-container lg:flex justify-center gap-x-16">
-          <div className="max-w-xs lg:max-w-fit p-2 mx-auto lg:mx-0">
+          <div className="max-w-xs md:max-w-fit lg:max-w-fit p-2 mx-auto lg:mx-0">
             <form onSubmit="" className="flex flex-col w-full">
               <div className="md:flex lg:flex gap-x-4">
                 <input
@@ -302,7 +306,7 @@ export default function Home() {
                 placeholder="Add Note"
               ></textarea>
               <button
-                className="lg:w-1/3 p-3 lg:p-4 rounded-xl bg-tele-blue-light hover:bg-tele-blue-dark text-white font-semibold"
+                className="md:w-1/3 lg:w-1/3 p-3 lg:p-4 rounded-xl bg-tele-blue-light hover:bg-tele-blue-dark text-white font-semibold"
                 type="submit"
               >
                 Book Appointment{" "}
@@ -318,22 +322,24 @@ export default function Home() {
       </section>
 
       <footer>
-        <div className="flex justify-center lg:justify-around gap-x-6 bg-gradient-to-t from-blue-600 to-tele-blue-light text-white py-6 lg:py-28">
-          <div className="w-1/3 lg:w-1/4">
-            <div className="flex justify-center lg:justify-start items-center gap-x-2 mb-4">
+        <div className="flex justify-center lg:justify-around gap-x-6 bg-gradient-to-t from-blue-600 to-tele-blue-light text-white p-4 md:p-14 lg:py-28">
+          <div className="w-1/2 lg:w-1/4">
+            <div className="flex justify-center md:justify-start lg:justify-start items-center gap-x-2 mb-4">
               <div className="flex justify-center items-center bg-white w-6 h-6 rounded-[100%]">
                 <p className="text-tele-blue">TM</p>
               </div>{" "}
-              <p className="text-sm lg:text-base font-semibold">Tele Medicine</p>{" "}
+              <p className="text-sm lg:text-base font-semibold">
+                Tele Medicine
+              </p>{" "}
             </div>
 
-            <p className="text-xs lg:text-sm text-center lg:text-left">
+            <p className="text-xs lg:text-sm text-left">
               Telemedicine provides progressive and affordable healthcare,
               accessible on mobile and any device for everyone.
             </p>
           </div>
 
-          <div className="px-8">
+          <div className="w-1/4 px-6">
             <h3 className="text-sm lg:text-base font-semibold mb-4">Company</h3>
             <ul className="text-xs lg:text-sm space-y-2">
               <li>
@@ -351,7 +357,7 @@ export default function Home() {
             </ul>
           </div>
 
-          <div className="px-8">
+          <div className="w-1/4 px-6">
             <h3 className="text-sm lg:text-base font-semibold mb-4">Help</h3>
             <ul className="text-xs lg:text-sm space-y-2">
               <li>
