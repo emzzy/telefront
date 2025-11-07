@@ -7,8 +7,8 @@ export default function Home() {
     <>
       <section className="hero-section">
         <div className="flex flex-col-reverse items-center lg:flex-row lg:items-center lg:justify-center gap-y-4 lg:gap-x-36 py-10 lg:pt-24 lg:pb-24 bg-tele-blue-lighter lg:rounded-br-[20em]">
-          <div className="flex flex-col items-center lg:items-start w-4/5 md:w-1/2 lg:w-1/3">
-            <h1 className="text-3xl lg:text-5xl lg:leading-tight font-bold mb-3">
+          <div className="flex flex-col items-center w-4/5 lg:items-start md:w-1/2 lg:w-1/3">
+            <h1 className="mb-3 text-3xl font-bold lg:text-5xl lg:leading-tight">
               Connecting You to Expert Care in Just a Few Clicks!
             </h1>
 
@@ -21,13 +21,13 @@ export default function Home() {
                 Your path to better health starts here.
               </p>
               <div className="flex justify-center md:mr-8 max-w-1/2 lg:max-w-1/2">
-                <button className="p-3 lg:p-4 rounded-2xl bg-tele-blue-light hover:bg-tele-blue-dark text-white font-semibold">
+                <button className="p-3 font-semibold text-white lg:p-4 rounded-2xl bg-tele-blue-light hover:bg-tele-blue-dark">
                   Book Appointment
                 </button>
               </div>
             </div>
           </div>
-          <div className="w-1/3 lg:block lg:w-1/5 relative">
+          <div className="relative w-1/3 lg:block lg:w-1/5">
             <img
               src={nurseHeroSec}
               alt="A nurse holding a pad"
@@ -50,17 +50,17 @@ export default function Home() {
       </section>
 
       <section>
-        <div className="flex flex-col lg:flex-row justify-center items-center py-10 lg:gap-x-10 lg:mt-20">
+        <div className="flex flex-col items-center justify-center py-10 lg:flex-row lg:gap-x-10 lg:mt-20">
           <img
             src={docTeleConsulting}
             alt="Doctor on the phone"
-            className="rounded-xl w-1/2 md:w-1/3 lg:w-1/5"
+            className="w-1/2 rounded-xl md:w-1/3 lg:w-1/5"
           />
-          <div className="flex flex-col items-center lg:items-start w-4/5 lg:w-1/3 mt-5 lg:mt-0">
-            <h3 className="text-2xl lg:text-3xl font-semibold lg:w-2/3 mb-2">
+          <div className="flex flex-col items-center w-4/5 mt-5 lg:items-start lg:w-1/3 lg:mt-0">
+            <h3 className="mb-2 text-2xl font-semibold lg:text-3xl lg:w-2/3">
               Welcome to the online centers
             </h3>
-            <ul className="list-disc list-inside space-y-2 lg:space-y-3 font-semibold">
+            <ul className="space-y-2 font-semibold list-disc list-inside lg:space-y-3">
               <li>Instant access to certified professionals</li>
               <li>Book appointments, chat and video call without the hassle</li>
               <li>Secure, private and always available when you need it</li>
@@ -71,16 +71,16 @@ export default function Home() {
       </section>
 
       <section className="services-section bg-[#eff8fa] py-10">
-        <h1 className="text-center text-3xl text-tele-blue font-bold py-8 lg:text-5xl lg:py-10">
+        <h1 className="py-8 text-3xl font-bold text-center text-tele-blue lg:text-5xl lg:py-10">
           Our Services
         </h1>
-        <div className="services-container w-1/2 mx-auto md:w-full lg:w-full flex flex-col md:flex-row lg:flex-row md:flex-wrap lg:flex-wrap justify-center items-center gap-10 lg:py-8 lg:space-y-0 lg:gap-12 lg:px-0">
-          <div className="search-card md:w-1/3 lg:w-1/4 flex flex-col items-center space-y-2 w-full bg-white rounded-lg px-3 py-4 lg:py-14">
+        <div className="flex flex-col items-center justify-center w-1/2 gap-10 mx-auto services-container md:w-full lg:w-full md:flex-row lg:flex-row md:flex-wrap lg:flex-wrap lg:py-8 lg:space-y-0 lg:gap-12 lg:px-0">
+          <div className="flex flex-col items-center w-full px-3 py-4 space-y-2 bg-white rounded-lg search-card md:w-1/3 lg:w-1/4 lg:py-14">
             <div className="flex justify-center items-center bg-tele-blue w-10 h-10 p-4 rounded-[100%] text-white text-xl">
               <i class="fas fa-user"></i>
             </div>
             <div className="lg:px-8">
-              <h4 className="text-center text-xl font-semibold mb-4">
+              <h4 className="mb-4 text-xl font-semibold text-center">
                 Search doctor
               </h4>
               <p className="text-gray-600">
@@ -89,12 +89,12 @@ export default function Home() {
               </p>
             </div>
           </div>
-          <div className="video-card card md:w-1/3 lg:w-1/4 flex flex-col items-center space-y-2 w-full bg-white rounded-lg px-3 py-4 lg:py-14">
+          <div className="flex flex-col items-center w-full px-3 py-4 space-y-2 bg-white rounded-lg video-card card md:w-1/3 lg:w-1/4 lg:py-14">
             <div className="flex justify-center items-center bg-tele-blue w-10 h-10 p-4 rounded-[100%] text-white text-xl">
               <i class="fas fa-video"></i>{" "}
             </div>
             <div className="lg:px-8">
-              <h4 className="text-center text-xl font-semibold mb-4">
+              <h4 className="mb-4 text-xl font-semibold text-center">
                 {" "}
                 Video consultation
               </h4>
@@ -104,12 +104,12 @@ export default function Home() {
               </p>
             </div>
           </div>
-          <div className="appointment-card md:w-1/3 lg:w-1/4 flex flex-col items-center space-y-2 w-full bg-white rounded-lg px-3 py-4 lg:py-14">
+          <div className="flex flex-col items-center w-full px-3 py-4 space-y-2 bg-white rounded-lg appointment-card md:w-1/3 lg:w-1/4 lg:py-14">
             <div className="flex justify-center items-center bg-tele-blue w-10 h-10 p-4 rounded-[100%] text-white text-xl">
               <i class="fas fa-calendar-plus"></i>{" "}
             </div>
             <div className="lg:px-8">
-              <h4 className="text-center text-xl font-semibold mb-4">
+              <h4 className="mb-4 text-xl font-semibold text-center">
                 Appointment
               </h4>
               <p className="text-gray-600">
@@ -118,12 +118,12 @@ export default function Home() {
               </p>
             </div>
           </div>
-          <div className="emergency-card md:w-1/3 lg:w-1/4 flex flex-col items-center space-y-2 w-full bg-white rounded-lg px-3 py-4 lg:py-14">
+          <div className="flex flex-col items-center w-full px-3 py-4 space-y-2 bg-white rounded-lg emergency-card md:w-1/3 lg:w-1/4 lg:py-14">
             <div className="flex justify-center items-center bg-tele-blue w-10 h-10 p-4 rounded-[100%] text-white text-xl">
               <i class="fas fa-ambulance"></i>{" "}
             </div>
             <div className="lg:px-8">
-              <h4 className="text-center text-xl font-semibold mb-4">
+              <h4 className="mb-4 text-xl font-semibold text-center">
                 Emergency alerts
               </h4>
               <p className="text-gray-600">
@@ -132,12 +132,12 @@ export default function Home() {
               </p>
             </div>
           </div>
-          <div className="first-aid-card md:w-1/3 lg:w-1/4 flex flex-col items-center space-y-2 w-full bg-white rounded-lg px-3 py-4 lg:py-14">
+          <div className="flex flex-col items-center w-full px-3 py-4 space-y-2 bg-white rounded-lg first-aid-card md:w-1/3 lg:w-1/4 lg:py-14">
             <div className="flex justify-center items-center bg-tele-blue w-10 h-10 p-4 rounded-[100%] text-white text-xl">
               <i class="fas fa-medkit"></i>{" "}
             </div>
             <div className="lg:px-8">
-              <h4 className="text-center text-xl font-semibold mb-4">
+              <h4 className="mb-4 text-xl font-semibold text-center">
                 First aid guidance
               </h4>
               <p className="text-gray-600">
@@ -149,14 +149,14 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="doctors-cards-section bg-[#c6d7da]">
-        <div className="py-10">
-          <div className="md:w-2/3 md:mx-auto lg:w-1/2 flex justify-end lg:justify-between items-center gap-x-10 md:gap-x-24 ml-10 lg:ml-96 mr-4 mb-10">
-            <h1 className="text-center text-3xl lg:text-5xl font-bold">
+      <section className="doctors-cards-section bg-[#c6d7da] py-10">
+        <div>
+          <div className="flex items-center justify-end mb-10 ml-10 mr-4 gap-x-10 md:gap-x-24 md:w-2/3 md:mx-auto lg:w-1/2 lg:justify-center lg:gap-x-24 lg:ml-96">
+            <h1 className="text-3xl font-bold text-center lg:text-5xl">
               Our Doctors
             </h1>
             <a href="">
-              <p className="text-tele-blue text-sm lg:text-lg font-bold">
+              <p className="text-sm font-bold text-tele-blue lg:text-lg">
                 See more
               </p>
             </a>
@@ -173,76 +173,76 @@ export default function Home() {
               See more
             </a>
           </div> */}
-          <div className="doc-cards-container flex flex-col justify-center items-center gap-y-6 md:flex-row lg:flex-row md:gap-x-8 lg:gap-x-8">
-            <div className="bg-white w-2/4 md:w-1/4 lg:w-1/6 space-y-2 rounded-xl">
-              <div className="mx-auto w-48 h-36 overflow-hidden rounded-xl">
+          <div className="flex flex-col items-center justify-center doc-cards-container gap-y-6 md:flex-row lg:flex-row md:gap-x-8 lg:gap-x-8">
+            <div className="w-2/4 space-y-2 bg-white md:w-1/4 lg:w-1/6 rounded-xl">
+              <div className="w-48 mx-auto overflow-hidden h-36 rounded-xl">
                 <img
                   src={nurseHeroSec}
                   alt="A doctor holding a pad"
-                  className="w-full h-full mt-2 object-cover object-top"
+                  className="object-cover object-top w-full h-full mt-2"
                 />{" "}
               </div>
               <div className="px-4 pt-2 pb-6">
-                <p className="text-end text-xs lg:text-sm mb-2">104 reviews</p>
-                <p className="font-semibold text-sm lg:text-base lg:mb-2">
+                <p className="mb-2 text-xs text-end lg:text-sm">104 reviews</p>
+                <p className="text-sm font-semibold lg:text-base lg:mb-2">
                   Dr Priscillia Oko
                 </p>
-                <div className="flex text-xs lg:text-sm text-gray-600 space-x-2">
-                  <i className="fas fa-map-marker-alt pt-1"></i>
+                <div className="flex space-x-2 text-xs text-gray-600 lg:text-sm">
+                  <i className="pt-1 fas fa-map-marker-alt"></i>
                   <p>Brookpark Ext, 2705, North Olmsted, 440770</p>
                 </div>
                 <div className="text-center">
-                  <button className="mt-4 lg:mt-8 bg-tele-blue-light hover:bg-tele-blue-dark text-sm lg:text-base text-white p-2 px-6 rounded">
+                  <button className="p-2 px-6 mt-4 text-sm text-white rounded lg:mt-8 bg-tele-blue-light hover:bg-tele-blue-dark lg:text-base">
                     Chat
                   </button>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white w-2/4 md:w-1/4 lg:w-1/6 space-y-2 rounded-xl">
-              <div className="mx-auto w-48 h-36 overflow-hidden rounded-xl">
+            <div className="w-2/4 space-y-2 bg-white md:w-1/4 lg:w-1/6 rounded-xl">
+              <div className="w-48 mx-auto overflow-hidden h-36 rounded-xl">
                 <img
                   src={nurseHeroSec}
                   alt="A doctor holding a pad"
-                  className="w-full h-full mt-2 object-cover object-top"
+                  className="object-cover object-top w-full h-full mt-2"
                 />{" "}
               </div>
               <div className="px-4 pt-2 pb-6">
-                <p className="text-end text-xs lg:text-sm mb-2">104 reviews</p>
-                <p className="font-semibold text-sm lg:text-base lg:mb-2">
+                <p className="mb-2 text-xs text-end lg:text-sm">104 reviews</p>
+                <p className="text-sm font-semibold lg:text-base lg:mb-2">
                   Dr Cynthia Apunwa
                 </p>
-                <div className="flex text-xs lg:text-sm text-gray-600 space-x-2">
-                  <i className="fas fa-map-marker-alt pt-1"></i>
+                <div className="flex space-x-2 text-xs text-gray-600 lg:text-sm">
+                  <i className="pt-1 fas fa-map-marker-alt"></i>
                   <p>Brookpark Ext, 2705, North Olmsted, 440770</p>
                 </div>
                 <div className="text-center">
-                  <button className="mt-4 lg:mt-8 bg-tele-blue-light hover:bg-tele-blue-dark text-sm lg:text-base text-white p-2 px-6 rounded">
+                  <button className="p-2 px-6 mt-4 text-sm text-white rounded lg:mt-8 bg-tele-blue-light hover:bg-tele-blue-dark lg:text-base">
                     Chat
                   </button>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white w-2/4 md:w-1/4 lg:w-1/6 space-y-2 rounded-xl">
-              <div className="mx-auto w-48 h-36 overflow-hidden rounded-xl">
+            <div className="w-2/4 space-y-2 bg-white md:w-1/4 lg:w-1/6 rounded-xl">
+              <div className="w-48 mx-auto overflow-hidden h-36 rounded-xl">
                 <img
                   src={nurseHeroSec}
                   alt="A doctor holding a pad"
-                  className="w-full h-full mt-2 object-cover object-top"
+                  className="object-cover object-top w-full h-full mt-2"
                 />{" "}
               </div>
               <div className="px-4 pt-2 pb-6">
-                <p className="text-end text-xs lg:text-sm mb-2">104 reviews</p>
-                <p className="font-semibold text-sm lg:text-base lg:mb-2">
+                <p className="mb-2 text-xs text-end lg:text-sm">104 reviews</p>
+                <p className="text-sm font-semibold lg:text-base lg:mb-2">
                   Pharm Mike Uke
                 </p>
-                <div className="flex text-xs lg:text-sm text-gray-600 space-x-2">
-                  <i className="fas fa-map-marker-alt pt-1"></i>
+                <div className="flex space-x-2 text-xs text-gray-600 lg:text-sm">
+                  <i className="pt-1 fas fa-map-marker-alt"></i>
                   <p>Brookpark Ext, 2705, North Olmsted, 440770</p>
                 </div>
                 <div className="text-center">
-                  <button className="mt-4 lg:mt-8 bg-tele-blue-light hover:bg-tele-blue-dark text-sm lg:text-base text-white p-2 px-6 rounded">
+                  <button className="p-2 px-6 mt-4 text-sm text-white rounded lg:mt-8 bg-tele-blue-light hover:bg-tele-blue-dark lg:text-base">
                     Chat
                   </button>
                 </div>
@@ -252,23 +252,23 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="appointment-section py-10 lg:py-28">
-        <h1 className="text-center text-3xl lg:text-5xl font-bold text-tele-blue mb-8 lg:mb-24">
+      <section className="py-10 appointment-section lg:py-28">
+        <h1 className="mb-8 text-3xl font-bold text-center lg:text-5xl text-tele-blue lg:mb-24">
           Book Appointment
         </h1>
-        <div className="appointment-container lg:flex justify-center gap-x-16">
-          <div className="max-w-xs md:max-w-fit lg:max-w-fit p-2 mx-auto lg:mx-0">
+        <div className="justify-center appointment-container lg:flex gap-x-16">
+          <div className="max-w-xs p-2 mx-auto md:max-w-fit lg:max-w-fit lg:mx-0">
             <form onSubmit="" className="flex flex-col w-full">
               <div className="md:flex lg:flex gap-x-4">
                 <input
-                  className="w-full mb-5 p-3 lg:p-4 border-2 rounded-lg focus:border-tele-blue-dark focus:outline-none"
+                  className="w-full p-3 mb-5 border-2 rounded-lg lg:p-4 focus:border-tele-blue-dark focus:outline-none"
                   type="name"
                   // value={name}
                   // onChange={(e) => setname(e.target.value)}
                   placeholder="name"
                 />
                 <input
-                  className="w-full mb-5 p-3 lg:p-4 border-2 rounded-lg focus:border-tele-blue-dark focus:outline-none"
+                  className="w-full p-3 mb-5 border-2 rounded-lg lg:p-4 focus:border-tele-blue-dark focus:outline-none"
                   type="email"
                   // value={email}
                   // onChange={(e) => setEmail(e.target.value)}
@@ -277,14 +277,14 @@ export default function Home() {
               </div>
               <div className="md:flex lg:flex gap-x-4">
                 <input
-                  className="w-full mb-5 p-3 lg:p-4 border-2 rounded-lg focus:border-tele-blue-dark focus:outline-none"
+                  className="w-full p-3 mb-5 border-2 rounded-lg lg:p-4 focus:border-tele-blue-dark focus:outline-none"
                   type="phoneNumber"
                   // value={phoneNumber}
                   // onChange={(e) => setphoneNumber(e.target.value)}
                   placeholder="Phone Number"
                 />
                 <input
-                  className="w-full mb-5 p-3 lg:p-4 border-2 rounded-lg focus:border-tele-blue-dark focus:outline-none"
+                  className="w-full p-3 mb-5 border-2 rounded-lg lg:p-4 focus:border-tele-blue-dark focus:outline-none"
                   type="subject"
                   // value={subject}
                   // onChange={(e) => setsubject(e.target.value)}
@@ -293,20 +293,20 @@ export default function Home() {
               </div>
 
               <input
-                className="mb-5 p-3 lg:p-4 border-2 rounded-lg focus:border-tele-blue-dark focus:outline-none"
+                className="p-3 mb-5 border-2 rounded-lg lg:p-4 focus:border-tele-blue-dark focus:outline-none"
                 type="dateAndTime"
                 // value={dateAndTime}
                 // onChange={(e) => setdateAndTime(e.target.value)}
                 placeholder="Date & Time"
               />
               <textarea
-                className="h-36 mb-5 p-3 lg:p-4 border-2 rounded-lg focus:border-tele-blue-dark focus:outline-none"
+                className="p-3 mb-5 border-2 rounded-lg h-36 lg:p-4 focus:border-tele-blue-dark focus:outline-none"
                 name="text"
                 id="note"
                 placeholder="Add Note"
               ></textarea>
               <button
-                className="md:w-1/3 lg:w-1/3 p-3 lg:p-4 rounded-xl bg-tele-blue-light hover:bg-tele-blue-dark text-white font-semibold"
+                className="p-3 font-semibold text-white md:w-1/3 lg:w-1/3 lg:p-4 rounded-xl bg-tele-blue-light hover:bg-tele-blue-dark"
                 type="submit"
               >
                 Book Appointment{" "}
@@ -316,32 +316,32 @@ export default function Home() {
           <img
             src={glovedDoc}
             alt="A doctor wearing her gloves"
-            className="hidden lg:block w-1/3 h-fit p-2 rounded-xl object-cover"
+            className="hidden object-cover w-1/3 p-2 lg:block h-fit rounded-xl"
           />
         </div>
       </section>
 
       <footer>
-        <div className="flex justify-center lg:justify-around gap-x-6 bg-gradient-to-t from-blue-600 to-tele-blue-light text-white p-4 md:p-14 lg:py-28">
+        <div className="flex justify-center p-4 text-white lg:justify-around gap-x-6 bg-gradient-to-t from-blue-600 to-tele-blue-light md:p-14 lg:py-28">
           <div className="w-1/2 lg:w-1/4">
-            <div className="flex justify-center md:justify-start lg:justify-start items-center gap-x-2 mb-4">
+            <div className="flex items-center justify-center mb-4 md:justify-start lg:justify-start gap-x-2">
               <div className="flex justify-center items-center bg-white w-6 h-6 rounded-[100%]">
                 <p className="text-tele-blue">TM</p>
               </div>{" "}
-              <p className="text-sm lg:text-base font-semibold">
+              <p className="text-sm font-semibold lg:text-base">
                 Tele Medicine
               </p>{" "}
             </div>
 
-            <p className="text-xs lg:text-sm text-left">
+            <p className="text-xs text-left lg:text-sm">
               Telemedicine provides progressive and affordable healthcare,
               accessible on mobile and any device for everyone.
             </p>
           </div>
 
           <div className="w-1/4 px-6">
-            <h3 className="text-sm lg:text-base font-semibold mb-4">Company</h3>
-            <ul className="text-xs lg:text-sm space-y-2">
+            <h3 className="mb-4 text-sm font-semibold lg:text-base">Company</h3>
+            <ul className="space-y-2 text-xs lg:text-sm">
               <li>
                 <a href="">About</a>
               </li>
@@ -358,8 +358,8 @@ export default function Home() {
           </div>
 
           <div className="w-1/4 px-6">
-            <h3 className="text-sm lg:text-base font-semibold mb-4">Help</h3>
-            <ul className="text-xs lg:text-sm space-y-2">
+            <h3 className="mb-4 text-sm font-semibold lg:text-base">Help</h3>
+            <ul className="space-y-2 text-xs lg:text-sm">
               <li>
                 <a href="">Help center</a>
               </li>
