@@ -4,7 +4,7 @@ export default function RegisterAHealthcareProvider() {
       <div className="mb-4">
         <form onSubmit="" className="">
           <fieldset>
-            <div className="flex justify-center items-end gap-10 w-full">
+            <div className="flex flex-col items-center lg:flex-row justify-center items-end gap-10 w-full">
               <div className="flex flex-col gap-6 w-full max-w-xs lg:max-w-sm">
                 <div className="flex flex-col gap-1 max-w-32">
                   <label htmlFor="title">

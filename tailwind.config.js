@@ -8,6 +8,7 @@ export default {
         "tele-blue": {
           DEFAULT: "#259cd3",
           light: "#4db3e0",
+          lighter: "#bbccdc",
           dark: "#1d7ba8",
         },
       },
