@@ -1,0 +1,64 @@
+
+name: React Vite - Build and Test
+
+on:
+  push:
+    branches:
+      - ecrtest
+
+  pull_request:
+    branches:
+      - none
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout source code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Install Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22.18.0"
+          cache: npm
+
+      # 3. Install dependencies
+      - name: Install dependencies
+        run: npm ci
+      # Code quality validation
+      - name: Run ESLint
+        run: npm run lint
+      # 4. Build React/Vite application
+      - name: Build application
+        run: npm run build
+
+      # 5. Run automated tests if configured
+      - name: Run tests
+        run: CI=true npm run test --if-present
+
+      # 6. Setup Docker Buildx
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # 7. Validate Docker image build
+      - name: Build Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          push: false
+          tags: application:ci-${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

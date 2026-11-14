@@ -1,0 +1,28 @@
+name: Deploy IS
+
+on:
+  push:
+    branches:
+      - none
+  pull_request:
+    branches:
+      - none
+      
+  workflow_dispatch: 
+    inputs:
+      environment:
+        description: "Choose environment to deploy"
+        required: true
+        type: choice
+        options:
+          - ecrsetup
+jobs:
+  deploy-dev:
+    if: github.ref_name == 'ecrsetup'
+    runs-on: ubuntu-latest
+    environment: development
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+    

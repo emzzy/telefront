@@ -26,3 +26,10 @@
 **/dist
 LICENSE
 README.md
+node_modules
+dist
+.git
+.github
+.env
+.env.*
+npm-debug.log

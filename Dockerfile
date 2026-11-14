@@ -1,25 +1,30 @@
+
 ARG NODE_VERSION=22.18.0
 
+# Stage 1: Base
 FROM node:${NODE_VERSION}-alpine AS base
-# Set working directory for all build stages.
+
 WORKDIR /usr/src/app
+
+# Stage 2: Dependencies
 FROM base AS dependencies
 
-# Copy only dependency files
 COPY package*.json ./
 
-RUN npm install
+RUN npm ci
 
-FROM base AS  final
-
-ENV NODE_ENV=development
-
-COPY --from=dependencies /usr/src/app/node_modules ./node_modules
+# Stage 3: Build
+FROM dependencies AS build
 
 COPY . .
 
-EXPOSE 3000
+RUN npm run build
 
-# Run the application.
-CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
-# CMD ["npm", "run", "dev"]
+# Stage 4: Production
+FROM nginx:alpine AS final
+
+COPY --from=build /usr/src/app/dist /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
